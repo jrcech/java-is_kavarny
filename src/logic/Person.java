@@ -4,7 +4,6 @@ package logic;
  * @author slav02
  * @version ZS 2017
  */
-
 public class Person {
 
     private int id;
