@@ -3,7 +3,7 @@ package logic;
 /** Class Person
  * @author slav02
  * @version ZS 2017
- **/
+ */
 
 public class Person {
 
