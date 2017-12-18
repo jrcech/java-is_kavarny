@@ -20,7 +20,7 @@ public class Person {
     * @param firstName  jmeno
     * @param lastName   prijmeni
     * @param email      email
-    * @param isAdmin    je admin**/
+    * @param isAdmin    je admin*/
     public Person(int id, String username, String firstName, String lastName, String email, boolean isAdmin) {
         this.id = id;
         this.username = username;
