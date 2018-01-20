@@ -1,6 +1,7 @@
 package main;
 
 import GUI.Login;
+import GUI.Registration;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,6 +35,9 @@ public class Main extends Application {
         //Tlacitko - registrace
         Button registration = new Button();
         registration.setText("Registrace");
+        registration.setOnAction(event -> {
+            Registration reg = new Registration(primaryStage);
+        });
 
         //VBox
         VBox vBox = new VBox();

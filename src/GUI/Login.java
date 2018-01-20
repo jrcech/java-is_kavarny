@@ -1,7 +1,5 @@
 package GUI;
 
-import javafx.geometry.HPos;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,8 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -20,20 +17,15 @@ public class Login {
 
     /**
      *
-     * @param lastStage Stage minul0ho okna
+     * @param lastStage Stage minuleho okna
      */
     public Login(Stage lastStage){
 
         lastStage.hide();
 
-        BorderPane borderPane = new BorderPane();
-
         //Titulek
         Text title = new Text();
         title.setText("Zadejte přihlašovací údaje");
-
-        Label passWord = new Label();
-        passWord.setText("Heslo:");
 
         //Form - username
         Label userLabel = new Label();
@@ -50,6 +42,9 @@ public class Login {
         //Tlacitko - submit
         Button submitButton = new Button();
         submitButton.setText("Přihlásit");
+        submitButton.setOnAction(event -> {
+            Application app = new Application(loginStage);
+        });
 
         //Tlacitko - cancel
         Button cancelButton = new Button();
@@ -60,10 +55,9 @@ public class Login {
         });
 
         // TilePane - spojeni tlacitek
-        TilePane tileButtons = new TilePane(Orientation.HORIZONTAL);
-        tileButtons.setVgap(5);
-        tileButtons.getChildren().addAll(submitButton, cancelButton);
-        tileButtons.setAlignment(Pos.TOP_RIGHT);
+        HBox boxButtons = new HBox(5);
+        boxButtons.getChildren().addAll(submitButton, cancelButton);
+        boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
         //GridPane - rozlozeni formulare
         GridPane gridPane = new GridPane();
@@ -75,9 +69,10 @@ public class Login {
         gridPane.add(userField,1,1);
         gridPane.add(passLabel,0,2);
         gridPane.add(passField,1,2);
-        gridPane.add(tileButtons,1,3);
+        gridPane.add(boxButtons,1,3);
 
         //Window - setup
+        BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
         Scene scene = new Scene(borderPane, 450, 300);
 
@@ -86,5 +81,8 @@ public class Login {
         loginStage.setScene(scene);
         loginStage.show();
 
+    }
+    public Stage getPrimaryStage() {
+        return loginStage;
     }
 }
