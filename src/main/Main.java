@@ -1,5 +1,6 @@
 package main;
 
+import GUI.Login;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
+
+
+import java.awt.event.MouseEvent;
 
 public class Main extends Application {
 
@@ -23,6 +27,9 @@ public class Main extends Application {
         //Tlacitko - prihlaseni
         Button login = new Button();
         login.setText("Přihlášení");
+        login.setOnAction(event -> {
+            Login log = new Login(primaryStage);
+        });
 
         //Tlacitko - registrace
         Button registration = new Button();
