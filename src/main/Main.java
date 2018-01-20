@@ -6,12 +6,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.text.*;
 
 public class Main extends Application {
 
     public void start(Stage primaryStage){
         BorderPane borderPane = new BorderPane();
+
+        //Titulek
+        Text title = new Text();
+        title.setText("Vítejte v IS");
 
         //Tlacitko - prihlaseni
         Button login = new Button();
@@ -21,12 +28,14 @@ public class Main extends Application {
         Button registration = new Button();
         registration.setText("Registrace");
 
-        ////Window - setup
-        FlowPane center = new FlowPane();
-        center.setAlignment(Pos.CENTER);
-        center.getChildren().addAll(login, registration);
+        //VBox
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(title, login, registration);
+        vBox.setSpacing(15);
+        vBox.setAlignment(Pos.CENTER);
 
-        borderPane.setCenter(center);
+        //Window - setup
+        borderPane.setCenter(vBox);
         Scene scene = new Scene(borderPane, 450, 300);
         primaryStage.setTitle("Aplikace káva");
         primaryStage.setScene(scene);
