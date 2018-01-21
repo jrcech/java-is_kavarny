@@ -1,5 +1,6 @@
 package GUI;
 
+import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,7 +15,7 @@ public class Application {
     private Stage appStage;
     private MenuPanel menuPanel;
 
-    public Application(Stage lastStage){
+    public Application(Stage lastStage, Idatabase database){
 
         lastStage.hide();
 

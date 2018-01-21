@@ -1,5 +1,6 @@
 package GUI;
 
+import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,17 +11,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.Database;
 
 public class Login {
 
     private Stage loginStage;
+    private Idatabase database;
 
     /**
      *
      * @param lastStage Stage minuleho okna
      */
     public Login(Stage lastStage){
-
+        database = new Database();
         lastStage.hide();
 
         //Titulek
@@ -37,13 +40,26 @@ public class Login {
         Label passLabel = new Label();
         passLabel.setText("Heslo:");
         TextField passField = new TextField();
-        passField.setText("default");
+        passField.setText("12345Jizzy");
 
         //Tlacitko - submit
         Button submitButton = new Button();
         submitButton.setText("Přihlásit");
         submitButton.setOnAction(event -> {
-            Application app = new Application(loginStage);
+            String name = userField.getText();
+            String password = passField.getText();
+            String sql = "SELECT * FROM sql11216990.person WHERE (username = '" + name + "' AND password = '" + password + "')";
+            boolean databaseOperation = database.getSearchDatabase().databaseOperation("LOGIN", sql);
+            if (databaseOperation) {
+                sql = "SELECT * FROM sql11216990.person";
+                database.getSearchDatabase().databaseOperation("LOGIN", sql);
+                loginStage.hide();
+                Application app = new Application(loginStage, database);
+            } else {
+                String message = "Přihlášení se nezdařilo";
+                String error = "Zadané údaje nejsou správné";
+                database.alert(message, error);
+            }
         });
 
         //Tlacitko - cancel

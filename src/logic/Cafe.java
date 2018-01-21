@@ -8,6 +8,7 @@ public class Cafe {
 
     private int id;
     private String name;
+    private String shortDescription;
     private String description;
     private double rating;
     private String region;
@@ -17,19 +18,21 @@ public class Cafe {
     private String specialOffer;
 
     /** Constructor
-     * @param id            id
-     * @param name          nazev
-     * @param description   popis
-     * @param rating        celkove hodnoceni
-     * @param region        kraj
-     * @param address       adresa
-     * @param coffeeBrand   znacka kavy
-     * @param event         udalost
-     * @param specialOffer  specialni nabidky
+     * @param id                    id
+     * @param name                  nazev
+     * @param shortDescription      krátký popis
+     * @param description           popis
+     * @param rating                celkove hodnoceni
+     * @param region                kraj
+     * @param address               adresa
+     * @param coffeeBrand           znacka kavy
+     * @param event                 udalost
+     * @param specialOffer          specialni nabidky
      */
-    public Cafe (int id, String name, String description, double rating, String address, String region, String coffeeBrand, String event, String specialOffer) {
+    public Cafe (int id, String name, String shortDescription, String description, double rating, String address, String region, String coffeeBrand, String event, String specialOffer) {
         this.id = id;
         this.name = name;
+        this.shortDescription = shortDescription;
         this.description = description;
         this.rating = rating;
         this.region = region;

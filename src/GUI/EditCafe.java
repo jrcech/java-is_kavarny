@@ -1,5 +1,6 @@
 package GUI;
 
+import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,12 +12,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.Database;
 
 public class EditCafe {
 
     private Stage editStage;
+    private Idatabase database;
 
     public EditCafe(Stage lastStage){
+        database = new Database();
         lastStage.hide();
 
         //Titulek
@@ -56,7 +60,7 @@ public class EditCafe {
         Button submitButton = new Button();
         submitButton.setText("Potvrdit");
         submitButton.setOnAction(event -> {
-            Application app = new Application(editStage);
+            Application app = new Application(editStage, database);
         });
 
         //Tlacitko - cancel
