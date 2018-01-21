@@ -32,9 +32,11 @@ public class Application {
         FlowPane welcomePane = new FlowPane();
         welcomePane.getChildren().addAll(welcome);
         welcomePane.setAlignment(Pos.CENTER);
+        // PANEL - vysledky hledani
+        ScrollPane searchResults = new ScrollPane();
+        searchResults.setFitToWidth(true);
 
-
-        // PANEL - hledani, nova kavarna
+        // PANEL - hledani + nova kavarna
         TextField searchField = new TextField();
         Button searchButton = new Button();
         searchButton.setText("Vyhledat");
@@ -43,13 +45,18 @@ public class Application {
         HBox controlsPanel = new HBox(5);
         controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
         controlsPanel.setAlignment(Pos.TOP_CENTER);
-        ScrollPane searchResuls = new ScrollPane();
-        searchResuls.setFitToWidth(true);
-
 
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(controlsPanel, welcomePane,searchResuls);
+        vBox.getChildren().addAll(controlsPanel, welcomePane);
+        searchButton.setOnAction(event -> {
+            vBox.getChildren().addAll(searchResults);
+        });
+
+
+
+
+
 
 
         borderPane.setTop(menuPanel);
