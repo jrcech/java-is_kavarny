@@ -13,6 +13,22 @@ import javafx.stage.Stage;
 public class Registration {
 
     private Stage registrationStage;
+    private Text titlePersonal;
+    private Text titleRegistration;
+    private Label jmenoLabel;
+    private Label prijmeniLabel;
+    private Label userLabel;
+    private Label emailLabel;
+    private Label passLabel;
+    private Label passConfirmLabel;
+    private TextField jmenoField;
+    private TextField prijmeniField;
+    private TextField userField;
+    private TextField emailField;
+    private TextField passField;
+    private TextField passConfirmField;
+    private Button submitButton;
+    private Button cancelButton;
 
     /**
      *
@@ -23,55 +39,55 @@ public class Registration {
         lastStage.hide();
 
         //Titulek - Osobní udaje
-        Text titlePersonal = new Text();
+        titlePersonal = new Text();
         titlePersonal.setText("Osobní údaje:");
 
         //Titulek - Přihlašovací údaje
-        Text titleRegistration = new Text();
+        titleRegistration = new Text();
         titleRegistration.setText("Přihlašovací Údaje:");
 
         //Form - Jmeno
-        Label jmenoLabel = new Label();
+        jmenoLabel = new Label();
         jmenoLabel.setText("Jméno:");
-        TextField jmenoField = new TextField();
+        jmenoField = new TextField();
         jmenoField.setPromptText("Jan");
 
         //Form - Přijmení
-        Label prijmeniLabel = new Label();
+        prijmeniLabel = new Label();
         prijmeniLabel.setText("Přijmení:");
-        TextField prijmeniField = new TextField();
+        prijmeniField = new TextField();
         prijmeniField.setPromptText("Novák");
 
         //Form - username
-        Label userLabel = new Label();
+        userLabel = new Label();
         userLabel.setText("Nickname:");
-        TextField userField = new TextField();
+        userField = new TextField();
         userField.setPromptText("jizzy85");
 
         //Form - email
-        Label emailLabel = new Label();
+        emailLabel = new Label();
         emailLabel.setText("Email:");
-        TextField emailField = new TextField();
+        emailField = new TextField();
         emailField.setPromptText("jizzy@email.com");
 
         //Form - password
-        Label passLabel = new Label();
+        passLabel = new Label();
         passLabel.setText("Heslo:");
-        TextField passField = new TextField();
+        passField = new TextField();
         passField.setPromptText("password");
 
         //Form - password znovu
-        Label passConfirmLabel = new Label();
+        passConfirmLabel = new Label();
         passConfirmLabel.setText("Potvrď heslo:");
-        TextField passConfirmField = new TextField();
+        passConfirmField = new TextField();
         passConfirmField.setPromptText("password");
 
         //Tlacitko - submit
-        Button submitButton = new Button();
+        submitButton = new Button();
         submitButton.setText("Registrovat");
 
         //Tlacitko - cancel
-        Button cancelButton = new Button();
+        cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
             registrationStage.hide();

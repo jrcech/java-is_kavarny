@@ -16,6 +16,14 @@ public class SearchPanel extends VBox implements Observer {
 
     private Idatabase database;
     private Stage lastStage;
+    private Label nameLabel;
+    private Label nameDataLabel;
+    private Label shortDescriptionLabel;
+    private Label shortDescriptionDataLabel;
+    private Label ratingLabel;
+    private Label ratingDataLabel;
+    private Button detailButton;
+
 
     public SearchPanel(Stage lastStage,Idatabase database){
         this.lastStage = lastStage;
@@ -30,25 +38,25 @@ public class SearchPanel extends VBox implements Observer {
         for(Cafe cafe: database.getSearchDatabase().getCafe()){
 
             //LABEL - nazev kavarny
-            Label nameLabel = new Label();
+            nameLabel = new Label();
             nameLabel.setText("Název:");
-            Label nameDataLabel = new Label();
+            nameDataLabel = new Label();
             nameDataLabel.setText(cafe.getName());
 
             //LABEL - kratky popis
-            Label shortDescriptionLabel = new Label();
+            shortDescriptionLabel = new Label();
             shortDescriptionLabel.setText("Popis:");
-            Label shortDescriptionDataLabel = new Label();
+            shortDescriptionDataLabel = new Label();
             shortDescriptionDataLabel.setText(cafe.getShortDescription());
 
             //LABEL - hodnoceni
-            Label ratingLabel = new Label();
+            ratingLabel = new Label();
             ratingLabel.setText("Hodnocení: ");
-            Label ratingDataLabel = new Label();
+            ratingDataLabel = new Label();
             ratingDataLabel.setText("" + cafe.getRating());
 
             //BUTTON - detail kavarny
-            Button detailButton = new Button();
+            detailButton = new Button();
             detailButton.setText("Detail");
 
             //BUTTON Container

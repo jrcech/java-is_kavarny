@@ -17,6 +17,11 @@ public class Login {
 
     private Stage loginStage;
     private Idatabase database;
+    private Label userLabel;
+    private TextField userField;
+    private Label passLabel;
+    private TextField passField;
+    private Button submitButton;
 
     /**
      *
@@ -31,19 +36,19 @@ public class Login {
         title.setText("Zadejte přihlašovací údaje");
 
         //Form - username
-        Label userLabel = new Label();
+        userLabel = new Label();
         userLabel.setText("Účet:");
-        TextField userField = new TextField();
+        userField = new TextField();
         userField.setText("jizzy");
 
         //Form - password
-        Label passLabel = new Label();
+        passLabel = new Label();
         passLabel.setText("Heslo:");
-        TextField passField = new TextField();
+        passField = new TextField();
         passField.setText("12345Jizzy");
 
         //Button - submit
-        Button submitButton = new Button();
+        submitButton = new Button();
         submitButton.setText("Přihlásit");
         submitButton.setOnAction(event -> {
             String name = userField.getText();

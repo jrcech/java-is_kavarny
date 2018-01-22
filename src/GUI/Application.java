@@ -15,6 +15,11 @@ public class Application {
     private Stage appStage;
     private MenuPanel menuPanel;
     private SearchPanel searchPanel;
+    private Label welcomeLabel;
+    private Label notFoundLabel;
+    private TextField searchField;
+    private Button searchButton;
+    private Button newCafeButton;
 
     public Application(Stage lastStage, Idatabase database){
 
@@ -29,9 +34,9 @@ public class Application {
         appStage.setScene(scene);
 
 
-        Label welcomeLabel = new Label();
-        welcomeLabel.setText("Vítejte ");
-        Label notFoundLabel = new Label();
+        welcomeLabel = new Label();
+        welcomeLabel.setText("Vítejte" + database.getSearchDatabase().getLoggedPerson().getUsername());
+        notFoundLabel = new Label();
         notFoundLabel.setText("Nic podobného jsme nenalezli, zkuste zadat něco jiného");
         FlowPane infoPane = new FlowPane();
         infoPane.getChildren().addAll(welcomeLabel);
@@ -41,13 +46,13 @@ public class Application {
         ScrollPane searchResults = new ScrollPane();
         searchResults.setFitToWidth(true);
         //PANEL - hledani field + button
-        TextField searchField = new TextField();
-        Button searchButton = new Button();
+        searchField = new TextField();
+        searchButton = new Button();
         searchButton.setText("Vyhledat");
 
 
         //PANEL - button nova kavarna
-        Button newCafeButton = new Button();
+        newCafeButton = new Button();
         newCafeButton.setText("Přidat kavárnu");
         HBox controlsPanel = new HBox(5);
         controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
@@ -74,11 +79,6 @@ public class Application {
             }
 
         });
-
-
-
-
-
 
 
         borderPane.setTop(menuPanel);
