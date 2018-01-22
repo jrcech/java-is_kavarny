@@ -4,13 +4,11 @@ import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Cafe;
+import logic.Rating;
 
 public class DetailCafe {
 
@@ -25,6 +23,8 @@ public class DetailCafe {
     private Label offerLabel;
     private Label coffeeBrandLabel;
     private Label eventLabel;
+    private Label addRatingLabel;
+    private Label addCommentLabel;
     private TextField nameField;
     private TextField addressField;
     private TextField regionField;
@@ -33,7 +33,9 @@ public class DetailCafe {
     private TextField offerField;
     private TextField coffeeBrandField;
     private TextField eventField;
+    private TextArea addCommentArea;
 
+    private Button addRatingButton;
     private Button editButton;
     private Button deleteButton;
     private Button cancelButton;
@@ -41,6 +43,8 @@ public class DetailCafe {
     public DetailCafe(Stage lastStage, Idatabase database, int idCafe){
 
         this.database = database;
+        //ID prihlasene osoby
+        int idPerson = database.getSearchDatabase().getLoggedPerson().getId();
         ratingPanel = new RatingPanel(database, idCafe);
         //Titulek
         Text title = new Text();
@@ -79,7 +83,6 @@ public class DetailCafe {
         descArea.setPrefRowCount(4);
         descArea.setWrapText(true);
 
-
         //Form - Nabidka
         offerLabel = new Label();
         offerLabel.setText("Nabídka:");
@@ -99,6 +102,77 @@ public class DetailCafe {
         eventField = new TextField();
         eventField.setEditable(false);
 
+
+
+        //Tlacitko - edit cafe
+        editButton = new Button();
+        editButton.setText("Upravit");
+        editButton.setOnAction(event -> {
+            EditCafe editCafe = new EditCafe(detailStage, database, idCafe);
+        });
+
+        //Tlacitko - cancel
+        cancelButton = new Button();
+        cancelButton.setText("Zpět");
+        cancelButton.setOnAction(event -> {
+            detailStage.hide();
+            lastStage.show();
+        });
+
+        //Pridat Rating - Titulek
+        Text addRatingTitle = new Text();
+        title.setText("Přidejte vlastní hodnocení");
+        //Form - Rating
+        addRatingLabel = new Label();
+        addRatingLabel.setText("Značka kávy: ");
+        ComboBox addRatingValue = new ComboBox();
+        addRatingValue.getItems().addAll(5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.5, 0);
+
+        //Form - Comment
+        addCommentLabel = new Label();
+        addCommentLabel.setText("Komentář");
+        addCommentArea = new TextArea();
+        addCommentArea.setWrapText(true);
+        addCommentArea.setPrefRowCount(4);
+
+
+        //Tlacitko - submit rating
+        addRatingButton = new Button();
+        addRatingButton.setText("Odeslat hodnocení");
+        addRatingButton.setOnAction(event -> {
+            Double rating = (Double) addRatingValue.getSelectionModel().getSelectedItem();
+            String comment = addCommentArea.getText();
+            String ratingVal = String.valueOf(rating);
+            if (comment == null) {
+                comment = "";
+            }
+            boolean ratingValid = database.validData("choice", ratingVal);
+            boolean commentValid = database.validData("length150", comment);
+            if(ratingValid && commentValid){
+                String sql = "SELECT * FROM sql11216990.rating WHERE idCafe='" + idCafe + "' AND idPerson='" + idPerson + "'";
+                boolean databaseOperation = database.getSearchDatabase().databaseOperation("SELECT", sql);
+
+                if(!databaseOperation){
+                    sql = "INSERT INTO sql11216990.rating " + "(idCafe, idPerson, rating, comment) VALUES ('" + idCafe + "','" + idPerson + "','" + rating + "','" + comment + "')";
+                }
+                else {
+                    sql = "UPDATE sql11216990.rating SET idCafe='" + idCafe + "', idPerson='" + idPerson + "', rating='" + rating + "', comment='" + comment + "' WHERE idCafe='" + idCafe + "' AND idPerson='" + idPerson + "'";
+                }
+                databaseOperation = database.getSearchDatabase().databaseOperation("INSERT", sql);
+                if (databaseOperation) {
+                    database.getSearchDatabase().setNewRating(idPerson, idCafe, idPerson, rating, comment);
+                    String titleAlert = "Vaše hodnocení bylo uloženo";
+                    String textAlert = "Vaše hodnocení bylo uloženo do systému. Děkujeme";
+                    database.alert(titleAlert, textAlert);
+                }
+                else {
+                    String titleAlert = "Hodnocení se nepodařilo uložit";
+                    String textAlert = "Omlouváme se, váše hodnocení se nepodařilo uložit.";
+                    database.alert(titleAlert, textAlert);
+                }
+            }
+        });
+
         //LOOP - Priradi hodnoty do formulare
         for (Cafe cafe : database.getSearchDatabase().getCafe()) {
             if (idCafe == cafe.getId()) {
@@ -110,6 +184,12 @@ public class DetailCafe {
                 coffeeBrandField.setText(cafe.getCoffeeBrand());
                 eventField.setText(cafe.getEvent());
                 offerField.setText(cafe.getSpecialOffer());
+                for (Rating rating : database.getSearchDatabase().getRating()) {
+                    if (idCafe == rating.getIdCafe() && idPerson == rating.getIdPerson()) {
+                        addCommentArea.setText(rating.getComment());
+                        addRatingValue.setValue(rating.getRating());
+                    }
+                }
             }
         }
 
@@ -138,7 +218,26 @@ public class DetailCafe {
         boxButtons.getChildren().addAll(editButton, cancelButton, deleteButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
-        //GridPane - rozlozeni formulare s daty
+        //GridPane - Pridani hodnoceni
+        GridPane addRatingPane = new GridPane();
+        addRatingPane.setAlignment(Pos.CENTER);
+        addRatingPane.setHgap(5);
+        addRatingPane.setVgap(5);
+        addRatingPane.add(addRatingTitle,0,0, 2,1);
+        addRatingPane.add(addRatingLabel,0,1);
+        addRatingPane.add(addRatingValue,1,1);
+        addRatingPane.add(addCommentLabel,0,2);
+        addRatingPane.add(addCommentArea,1,2);
+        addRatingPane.add(addRatingButton,1,3);
+
+        //ScrollPane - dostupne hodnoceni uzivatelu
+        ScrollPane ratingPane = new ScrollPane();
+        ratingPane.setContent(ratingPanel);
+
+        VBox addRatingWrapper = new VBox();
+        addRatingWrapper.getChildren().addAll(addRatingPane, ratingPane);
+
+        //GridPane - detailni informace o kavarne
         GridPane detailPane = new GridPane();
         detailPane.setAlignment(Pos.CENTER);
         detailPane.setHgap(10);
@@ -162,8 +261,6 @@ public class DetailCafe {
         detailPane.add(offerField,1,8);
         detailPane.add(boxButtons,1,9);
 
-        ScrollPane ratingPane = new ScrollPane();
-        ratingPane.setContent(ratingPanel);
 
         GridPane gridPane = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();
@@ -173,7 +270,7 @@ public class DetailCafe {
         gridPane.getColumnConstraints().addAll(col1,col2);
         detailPane.setAlignment(Pos.CENTER);
         gridPane.add(detailPane,0,0);
-        gridPane.add(ratingPane,1,0);
+        gridPane.add(addRatingWrapper,1,0);
 
 
         BorderPane borderPane = new BorderPane();
