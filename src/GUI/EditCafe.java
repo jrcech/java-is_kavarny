@@ -12,15 +12,34 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.Cafe;
 import logic.Database;
 
 public class EditCafe {
 
     private Stage editStage;
     private Idatabase database;
+    private Label nameLabel;
+    private Label addressLabel;
+    private Label regionLabel;
+    private Label shortDescLabel;
+    private Label descLabel;
+    private Label offerLabel;
+    private Label coffeeBrandLabel;
+    private Label eventLabel;
+    private TextField nameField;
+    private TextField addressField;
+    private TextField shortDescField;
+    private TextField descField;
+    private TextField offerField;
+    private TextField coffeeBrandField;
+    private TextField eventField;
 
-    public EditCafe(Stage lastStage){
-        database = new Database();
+    private Button submitButton;
+    private Button cancelButton;
+
+    public EditCafe(Stage lastStage, Idatabase database, int idCafe){
+        this.database = database;
         lastStage.hide();
 
         //Titulek
@@ -28,48 +47,74 @@ public class EditCafe {
         title.setText("Vyplňte údaje kavárny");
 
         //Form - Nazev
-        Label nameLabel = new Label();
+        nameLabel = new Label();
         nameLabel.setText("Název:");
-        TextField nameField = new TextField();
+        nameField = new TextField();
 
         //Form - Adresa
-        Label addressLabel = new Label();
+        addressLabel = new Label();
         addressLabel.setText("Adresa:");
-        TextField addressField = new TextField();
+        addressField = new TextField();
 
         //Form - Kraje
-        Label regionLabel = new Label();
+        regionLabel = new Label();
         regionLabel.setText("Kraj:");
         ComboBox regionBox = new ComboBox();
         regionBox.getItems().addAll("Praha", "Středočeský Kraj", "Jihočeský Kraj", "Plzeňský kraj", "Karlovarský kraj", "Ústecký kraj", "Liberecký kraj", "Královehradecký kraj", "Pardubický kraj", "kraj Vysočina", "Jihomoravský kraj", "Olomoucký kraj", "Moravskoslezský kraj", "Zlínský kraj");
 
-
         //Form - Popis
-        Label descLabel = new Label();
+        descLabel = new Label();
         descLabel.setText("Popis:");
-        TextField descField = new TextField();
+        descField = new TextField();
+        descLabel.setWrapText(true);
 
 
         //Form - Nabidka
-        Label offerLabel = new Label();
+        offerLabel = new Label();
         offerLabel.setText("Nabídka:");
-        TextField offerField = new TextField();
+        offerField = new TextField();
 
+        coffeeBrandLabel = new Label();
+        coffeeBrandLabel.setText("Značka kávy: ");
+        coffeeBrandField = new TextField();
+
+
+        eventLabel = new Label();
+        eventLabel.setText("Událost:");
+        eventField = new TextField();
+        eventLabel.setWrapText(true);
+
+        //Pokud neni kavarna nova (tzn nema id 99999999), vyplni se udaje z datavaze
+        if (idCafe != 99999999) {
+            for (Cafe cafe : database.getSearchDatabase().getCafe()) {
+                if (idCafe == cafe.getId()) {
+                    nameField.setText(cafe.getName());
+                    addressField.setText(cafe.getAddress());
+                    regionBox.setValue(cafe.getRegion());
+                    shortDescField.setText(cafe.getShortDescription());
+                    descField.setText(cafe.getDescription());
+                    coffeeBrandField.setText(cafe.getCoffeeBrand());
+                    eventField.setText(cafe.getEvent());
+                    offerField.setText(cafe.getSpecialOffer());
+                }
+            }
+        }
 
         //Tlacitko - submit
-        Button submitButton = new Button();
+        submitButton = new Button();
         submitButton.setText("Potvrdit");
         submitButton.setOnAction(event -> {
             Application app = new Application(editStage, database);
         });
 
         //Tlacitko - cancel
-        Button cancelButton = new Button();
+        cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
             editStage.hide();
             lastStage.show();
         });
+
 
         // TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(5);

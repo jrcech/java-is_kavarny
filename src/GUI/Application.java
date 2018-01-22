@@ -54,6 +54,11 @@ public class Application {
         //PANEL - button nova kavarna
         newCafeButton = new Button();
         newCafeButton.setText("Přidat kavárnu");
+        newCafeButton.setOnAction(event -> {
+            EditCafe editCafe = new EditCafe(appStage, database, 99999999);
+        });
+
+        //CONTROLS PANEL
         HBox controlsPanel = new HBox(5);
         controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
         controlsPanel.setAlignment(Pos.TOP_CENTER);
