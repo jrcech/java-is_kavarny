@@ -52,7 +52,9 @@ public class RatingPanel extends VBox implements Observer  {
                 commentLabel.setText("Komentář:");
                 TextArea commentTextArea = new TextArea();
                 commentTextArea.setText(rating.getComment());
-                commentTextArea.setPrefRowCount(4);
+                commentTextArea.setPrefRowCount(2);
+                commentTextArea.setPrefColumnCount(10);
+                commentTextArea.setWrapText(true);
                 commentTextArea.setEditable(false);
 
                 //CAFE Container

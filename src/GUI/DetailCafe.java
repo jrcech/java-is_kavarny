@@ -3,11 +3,9 @@ package GUI;
 import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -18,6 +16,7 @@ public class DetailCafe {
 
     private Stage detailStage;
     private Idatabase database;
+    private RatingPanel ratingPanel;
     private Label nameLabel;
     private Label addressLabel;
     private Label regionLabel;
@@ -30,7 +29,7 @@ public class DetailCafe {
     private TextField addressField;
     private TextField regionField;
     private TextField shortDescField;
-    private TextField descField;
+    private TextArea descArea;
     private TextField offerField;
     private TextField coffeeBrandField;
     private TextField eventField;
@@ -41,7 +40,7 @@ public class DetailCafe {
     public DetailCafe(Stage lastStage, Idatabase database, int idCafe){
 
         this.database = database;
-
+        ratingPanel = new RatingPanel(database, idCafe);
         //Titulek
         Text title = new Text();
         title.setText("Detailní údaje kavárny");
@@ -74,8 +73,10 @@ public class DetailCafe {
         descLabel = new Label();
         descLabel.setText("Popis:");
         descLabel.setWrapText(true);
-        descField = new TextField();
-        descField.setEditable(false);
+        descArea = new TextArea();
+        descArea.setEditable(false);
+        descArea.setPrefRowCount(4);
+        descArea.setWrapText(true);
 
 
         //Form - Nabidka
@@ -104,7 +105,7 @@ public class DetailCafe {
                 addressField.setText(cafe.getAddress());
                 regionField.setText(cafe.getRegion());
                 shortDescField.setText(cafe.getShortDescription());
-                descField.setText(cafe.getDescription());
+                descArea.setText(cafe.getDescription());
                 coffeeBrandField.setText(cafe.getCoffeeBrand());
                 eventField.setText(cafe.getEvent());
                 offerField.setText(cafe.getSpecialOffer());
@@ -132,35 +133,50 @@ public class DetailCafe {
         boxButtons.getChildren().addAll(editButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
-        //GridPane - rozlozeni formulare
+        //GridPane - rozlozeni formulare s daty
+        GridPane detailPane = new GridPane();
+        detailPane.setAlignment(Pos.CENTER);
+        detailPane.setHgap(10);
+        detailPane.setVgap(10);
+        detailPane.add(title,0,0, 2,1);
+        detailPane.add(nameLabel,0,1);
+        detailPane.add(nameField,1,1);
+        detailPane.add(addressLabel,0,2);
+        detailPane.add(addressField,1,2);
+        detailPane.add(regionLabel,0,3);
+        detailPane.add(regionField,1,3);
+        detailPane.add(shortDescLabel,0,4);
+        detailPane.add(shortDescField,1,4);
+        detailPane.add(descLabel,0,5);
+        detailPane.add(descArea,1,5);
+        detailPane.add(coffeeBrandLabel,0,6);
+        detailPane.add(coffeeBrandField,1,6);
+        detailPane.add(eventLabel,0,7);
+        detailPane.add(eventField,1,7);
+        detailPane.add(offerLabel,0,8);
+        detailPane.add(offerField,1,8);
+        detailPane.add(boxButtons,1,9);
+
+        ScrollPane ratingPane = new ScrollPane();
+        ratingPane.setContent(ratingPanel);
+
         GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.add(title,0,0, 2,1);
-        gridPane.add(nameLabel,0,1);
-        gridPane.add(nameField,1,1);
-        gridPane.add(addressLabel,0,2);
-        gridPane.add(addressField,1,2);
-        gridPane.add(regionLabel,0,3);
-        gridPane.add(regionField,1,3);
-        gridPane.add(shortDescLabel,0,4);
-        gridPane.add(shortDescField,1,4);
-        gridPane.add(descLabel,0,5);
-        gridPane.add(descField,1,5);
-        gridPane.add(coffeeBrandLabel,0,6);
-        gridPane.add(coffeeBrandField,1,6);
-        gridPane.add(eventLabel,0,7);
-        gridPane.add(eventField,1,7);
-        gridPane.add(offerLabel,0,8);
-        gridPane.add(offerField,1,8);
-        gridPane.add(boxButtons,1,9);
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(60);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(40);
+        gridPane.getColumnConstraints().addAll(col1,col2);
+        detailPane.setAlignment(Pos.CENTER);
+        gridPane.add(detailPane,0,0);
+        gridPane.add(ratingPane,1,0);
+
 
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
 
+
         detailStage = new Stage();
-        Scene scene = new Scene(borderPane, 400, 500);
+        Scene scene = new Scene(borderPane, 600, 500);
         detailStage.setTitle("Aplikace káva - Detail Kavárny");
         detailStage.setScene(scene);
         detailStage.show();
