@@ -36,6 +36,7 @@ public class DetailCafe {
     private TextField eventField;
 
     private Button editButton;
+    private Button deleteButton;
     private Button cancelButton;
 
     public DetailCafe(Stage lastStage, Idatabase database, int idCafe){
@@ -126,10 +127,14 @@ public class DetailCafe {
             lastStage.show();
         });
 
+        //Tlacitko - delete
+        deleteButton = new Button();
+        deleteButton.setText("Smazat");
+        deleteButton.setOnAction(event -> new DeleteCafe(detailStage, database, idCafe));
 
         // TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(5);
-        boxButtons.getChildren().addAll(editButton, cancelButton);
+        boxButtons.getChildren().addAll(editButton, cancelButton, deleteButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
         //GridPane - rozlozeni formulare
