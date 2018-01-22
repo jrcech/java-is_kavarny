@@ -109,6 +109,11 @@ public class SearchDatabase implements Subject {
                 statement.executeUpdate();
                 value = true;
             }
+            if (option.equals("DELETE")) {
+                statement = connection.prepareStatement(sql);
+                statement.executeUpdate();
+                value = true;
+            }
             statement.close();
             connection.close();
         } catch (SQLException | NullPointerException | ClassNotFoundException ex) {
