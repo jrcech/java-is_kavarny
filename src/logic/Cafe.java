@@ -41,4 +41,44 @@ public class Cafe {
         this.event = event;
         this.specialOffer = specialOffer;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCoffeeBrand() {
+        return coffeeBrand;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public String getSpecialOffer() {
+        return specialOffer;
+    }
 }
