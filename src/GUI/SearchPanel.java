@@ -2,8 +2,12 @@ package GUI;
 
 import interfaces.Idatabase;
 import interfaces.Observer;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.Cafe;
@@ -27,21 +31,48 @@ public class SearchPanel extends VBox implements Observer {
 
             //LABEL - nazev kavarny
             Label nameLabel = new Label();
-            nameLabel.setText("Název: " + cafe.getName());
+            nameLabel.setText("Název:");
+            Label nameDataLabel = new Label();
+            nameDataLabel.setText(cafe.getName());
 
+            //LABEL - kratky popis
             Label shortDescriptionLabel = new Label();
-            shortDescriptionLabel.setText("Popis: " + cafe.getShortDescription());
+            shortDescriptionLabel.setText("Popis:");
+            Label shortDescriptionDataLabel = new Label();
+            shortDescriptionDataLabel.setText(cafe.getShortDescription());
 
+            //LABEL - hodnoceni
             Label ratingLabel = new Label();
-            ratingLabel.setText("Hodnocení: " + cafe.getRating());
+            ratingLabel.setText("Hodnocení: ");
+            Label ratingDataLabel = new Label();
+            ratingDataLabel.setText("" + cafe.getRating());
 
+            //BUTTON - detail kavarny
             Button detailButton = new Button();
             detailButton.setText("Detail");
 
-            VBox vBox = new VBox();
-            vBox.getChildren().addAll(nameLabel,shortDescriptionLabel, ratingLabel);
+            //BUTTON Container
+            BorderPane buttonPane = new BorderPane();
+            buttonPane.setCenter(detailButton);
 
-            this.getChildren().add(vBox);
+            //CAFE Container
+            GridPane cafePane = new GridPane();
+            cafePane.setAlignment(Pos.CENTER);
+            cafePane.setHgap(5);
+            cafePane.setVgap(0);
+            cafePane.add(nameLabel,0,0);
+            cafePane.add(nameDataLabel,1,0);
+            cafePane.add(shortDescriptionLabel,0,1);
+            cafePane.add(shortDescriptionDataLabel,1,1);
+            cafePane.add(ratingLabel,0,2);
+            cafePane.add(ratingDataLabel,1,2);
+
+            //PANEL - CAFE + BUTTON
+            HBox hBox = new HBox();
+            hBox.setSpacing(25);
+            hBox.getChildren().addAll(cafePane, buttonPane);
+
+            this.getChildren().add(hBox);
         }
 
     }
