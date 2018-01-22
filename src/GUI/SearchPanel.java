@@ -58,6 +58,10 @@ public class SearchPanel extends VBox implements Observer {
             //BUTTON - detail kavarny
             detailButton = new Button();
             detailButton.setText("Detail");
+            detailButton.setOnAction(event -> {
+                int id = cafe.getId();
+                DetailCafe detailCafe = new DetailCafe(lastStage,database,id);
+            });
 
             //BUTTON Container
             BorderPane buttonPane = new BorderPane();

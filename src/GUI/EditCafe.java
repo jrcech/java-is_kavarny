@@ -63,22 +63,27 @@ public class EditCafe {
         regionBox.getItems().addAll("Praha", "Středočeský Kraj", "Jihočeský Kraj", "Plzeňský kraj", "Karlovarský kraj", "Ústecký kraj", "Liberecký kraj", "Královehradecký kraj", "Pardubický kraj", "kraj Vysočina", "Jihomoravský kraj", "Olomoucký kraj", "Moravskoslezský kraj", "Zlínský kraj");
 
         //Form - Popis
+        shortDescLabel = new Label();
+        shortDescLabel.setText("Krátký popis:");
+        shortDescField = new TextField();
+
+        //Form - Popis
         descLabel = new Label();
         descLabel.setText("Popis:");
         descField = new TextField();
         descLabel.setWrapText(true);
-
 
         //Form - Nabidka
         offerLabel = new Label();
         offerLabel.setText("Nabídka:");
         offerField = new TextField();
 
+        //Form - Znacka kavy
         coffeeBrandLabel = new Label();
         coffeeBrandLabel.setText("Značka kávy: ");
         coffeeBrandField = new TextField();
 
-
+        //Form - Udalost
         eventLabel = new Label();
         eventLabel.setText("Událost:");
         eventField = new TextField();
@@ -133,16 +138,22 @@ public class EditCafe {
         gridPane.add(addressField,1,2);
         gridPane.add(regionLabel,0,3);
         gridPane.add(regionBox,1,3);
-        gridPane.add(descLabel,0,4);
-        gridPane.add(descField,1,4);
-        gridPane.add(offerLabel,0,5);
-        gridPane.add(offerField,1,5);
-        gridPane.add(boxButtons,1,6);
+        gridPane.add(shortDescLabel,0,4);
+        gridPane.add(shortDescField,1,4);
+        gridPane.add(descLabel,0,5);
+        gridPane.add(descField,1,5);
+        gridPane.add(coffeeBrandLabel,0,6);
+        gridPane.add(coffeeBrandField,1,6);
+        gridPane.add(eventLabel,0,7);
+        gridPane.add(eventField,1,7);
+        gridPane.add(offerLabel,0,8);
+        gridPane.add(offerField,1,8);
+        gridPane.add(boxButtons,1,9);
 
         //Window - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
-        Scene scene = new Scene(borderPane, 450, 300);
+        Scene scene = new Scene(borderPane, 450, 400);
 
         editStage = new Stage();
         editStage.setTitle("Aplikace káva - Přihlášení");
