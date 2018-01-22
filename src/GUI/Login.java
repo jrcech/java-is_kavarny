@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -20,7 +21,7 @@ public class Login {
     private Label userLabel;
     private TextField userField;
     private Label passLabel;
-    private TextField passField;
+    private PasswordField passField;
     private Button submitButton;
 
     /**
@@ -44,7 +45,7 @@ public class Login {
         //Form - password
         passLabel = new Label();
         passLabel.setText("Heslo:");
-        passField = new TextField();
+        passField = new PasswordField();
         passField.setText("12345Jizzy");
 
         //Button - submit

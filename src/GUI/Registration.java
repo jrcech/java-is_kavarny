@@ -1,17 +1,21 @@
 package GUI;
 
+import interfaces.Idatabase;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.Database;
 
 public class Registration {
 
+    private Idatabase database;
     private Stage registrationStage;
     private Text titlePersonal;
     private Text titleRegistration;
@@ -25,8 +29,8 @@ public class Registration {
     private TextField prijmeniField;
     private TextField userField;
     private TextField emailField;
-    private TextField passField;
-    private TextField passConfirmField;
+    private PasswordField passField;
+    private PasswordField passConfirmField;
     private Button submitButton;
     private Button cancelButton;
 
@@ -35,7 +39,7 @@ public class Registration {
      * @param lastStage Stage minuleho okna
      */
     public Registration(Stage lastStage){
-
+        database = new Database();
         lastStage.hide();
 
         //Titulek - Osobní udaje
@@ -73,18 +77,44 @@ public class Registration {
         //Form - password
         passLabel = new Label();
         passLabel.setText("Heslo:");
-        passField = new TextField();
+        passField = new PasswordField();
         passField.setPromptText("password");
 
         //Form - password znovu
         passConfirmLabel = new Label();
         passConfirmLabel.setText("Potvrď heslo:");
-        passConfirmField = new TextField();
+        passConfirmField = new PasswordField();
         passConfirmField.setPromptText("password");
 
         //Tlacitko - submit
         submitButton = new Button();
         submitButton.setText("Registrovat");
+        submitButton.setOnAction(event -> {
+            String jmeno = jmenoField.getText();
+            String prijmeni = prijmeniField.getText();
+            String username = userField.getText();
+            String email = emailField.getText();
+            String pass = passField.getText();
+            String passConfirm = passConfirmField.getText();
+
+            String sql = "SELECT * FROM sql11216990.person WHERE username='" + username + "'";
+            boolean databaseOperation = database.getSearchDatabase().databaseOperation("SELECT", sql);
+
+            if (!databaseOperation) {
+                sql = "INSERT INTO sql11216990.person " + "(username, firstName, lastName, email, password, isAdmin) VALUES (" + "'" + username + "','" + jmeno + "','" + prijmeni + "','" + email + "','" + pass + "', 0" + ")";
+                database.getSearchDatabase().databaseOperation("INSERT", sql);
+                String title = "Registrace úspěšně dokončena";
+                String text = "Můžete se přihlásit";
+                database.alert(title, text);
+                registrationStage.hide();
+                lastStage.show();
+            } else {
+                String title = "Registrace se nezdařila";
+                String text = "Tento nickname již existuje";
+                database.alert(title, text);
+                userLabel.setStyle("-fx-text-fill: red");
+            }
+        });
 
         //Tlacitko - cancel
         cancelButton = new Button();
@@ -95,7 +125,6 @@ public class Registration {
         });
 
         // TilePane - spojeni tlacitek
-
         HBox boxButtons = new HBox(5);
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
@@ -132,38 +161,6 @@ public class Registration {
         vBox.setSpacing(15);
         vBox.setAlignment(Pos.CENTER);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
         //Window - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(vBox);
@@ -173,6 +170,5 @@ public class Registration {
         registrationStage.setTitle("Aplikace káva - Registrace");
         registrationStage.setScene(scene);
         registrationStage.show();
-
     }
 }
