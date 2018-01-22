@@ -2,8 +2,10 @@ package GUI;
 
 import interfaces.Idatabase;
 import interfaces.Observer;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.Person;
@@ -27,7 +29,7 @@ public class RatingPanel extends VBox implements Observer  {
         this.getChildren().clear();
         for(Rating rating : database.getSearchDatabase().getRating()){
             if(rating.getIdCafe() == id){
-                
+
                 //LABEL - Uzivatel
                 Label userLabel = new Label();
                 userLabel.setText("Uživatel:");
@@ -50,9 +52,21 @@ public class RatingPanel extends VBox implements Observer  {
                 commentLabel.setText("Komentář:");
                 TextArea commentTextArea = new TextArea();
                 commentTextArea.setText(rating.getComment());
+                commentTextArea.setPrefRowCount(4);
                 commentTextArea.setEditable(false);
 
-
+                //CAFE Container
+                GridPane ratingPane = new GridPane();
+                ratingPane.setAlignment(Pos.CENTER);
+                ratingPane.setHgap(5);
+                ratingPane.setVgap(0);
+                ratingPane.add(userLabel,0,0);
+                ratingPane.add(userDataLabel,1,0);
+                ratingPane.add(ratingLabel,0,1);
+                ratingPane.add(ratingDataLabel,1,1);
+                ratingPane.add(commentLabel,0,2);
+                ratingPane.add(commentTextArea,1,2);
+                this.getChildren().addAll(ratingPane);
             }
         };
     }
