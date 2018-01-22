@@ -48,7 +48,7 @@ public class Database implements Idatabase {
                     return true;
                 }
                 break;
-            case "special":
+            case "length150":
                 if (name.length() >= 0 && name.length() <= 150) {
                     return true;
                 }

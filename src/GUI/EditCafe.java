@@ -109,7 +109,52 @@ public class EditCafe {
         submitButton = new Button();
         submitButton.setText("Potvrdit");
         submitButton.setOnAction(event -> {
-            Application app = new Application(editStage, database);
+            //Validace dat
+            String nameString = nameField.getText();
+            String addressString = addressField.getText();
+            String regionString = (String) regionBox.getSelectionModel().getSelectedItem();
+            String shortDescriptionString = shortDescField.getText();
+            String descriptionString = descField.getText();
+            String coffeeBrandString = coffeeBrandField.getText();
+            String eventString = eventField.getText();
+            String offerString = offerField.getText();
+            if (regionString == null) {
+                regionString = "";
+            }
+            boolean nameValid = database.validData("cafe", nameString);
+            boolean addressValid = database.validData("cafe", addressString);
+            boolean regionValid = database.validData("cafe", regionString);
+            boolean shortDescriptionValid = database.validData("cafe", shortDescriptionString);
+            boolean descriptionValid = database.validData("desc", descriptionString);
+            boolean coffeeBrandValid = database.validData("cafe", coffeeBrandString);
+            boolean eventValid = database.validData("length150", eventString);
+            boolean offerValid = database.validData("length150", offerString);
+
+            if(nameValid && addressValid && regionValid && shortDescriptionValid && descriptionValid && coffeeBrandValid && eventValid && offerValid){
+                String sql;
+                if (idCafe == 99999999) {
+                    sql = "INSERT INTO sql11216990.cafe " + "(name, shortDescription, description, address, region, coffeeBrand, event, specialOffer) VALUES ("
+                            + "'" + nameString + "','" + shortDescriptionString + "','" + descriptionString + "','" + addressString + "','" + regionString + "','" + coffeeBrandString + "','" + eventString + "','" + offerString + "')";
+                } else {
+                    sql = "UPDATE sql11216990.cafe SET name='" + nameString + "', shortDescription='" + shortDescriptionString + "', description='" + descriptionString + "', address='" + addressString + "', region='" + regionString + "', coffeeBrand='" + coffeeBrandString + "', event='" + eventString + "', specialOffer='" + offerString + "' WHERE cafe.id=" + idCafe ;
+
+                }
+                boolean databaseOperation = database.getSearchDatabase().databaseOperation("INSERT", sql);
+                if (databaseOperation) {
+                    String titleAlert = "Změna byla uložena";
+                    String textAlert = "Nová data byla zapsána do databáze.";
+                    database.alert(titleAlert, textAlert);
+                    editStage.hide();
+                    if (idCafe == 99999999) {
+                        lastStage.show();
+                    }
+                } else {
+                    String titleAlert = "Změna neproběhla.";
+                    String textAlert = "Něco je špatně, zkuste to prosím později.";
+                    database.alert(titleAlert, textAlert);
+                }
+            }
+
         });
 
         //Tlacitko - cancel
@@ -156,7 +201,7 @@ public class EditCafe {
         Scene scene = new Scene(borderPane, 450, 400);
 
         editStage = new Stage();
-        editStage.setTitle("Aplikace káva - Přihlášení");
+        editStage.setTitle("Aplikace káva - Edit kavárny");
         editStage.setScene(scene);
         editStage.show();
     }
