@@ -35,7 +35,7 @@ public class Application {
 
 
         welcomeLabel = new Label();
-        welcomeLabel.setText("Vítejte" + database.getSearchDatabase().getLoggedPerson().getUsername());
+        welcomeLabel.setText("Vítejte uživateli " + database.getSearchDatabase().getLoggedPerson().getUsername());
         notFoundLabel = new Label();
         notFoundLabel.setText("Nic podobného jsme nenalezli, zkuste zadat něco jiného");
         FlowPane infoPane = new FlowPane();
