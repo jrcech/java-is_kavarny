@@ -109,7 +109,7 @@ public class EditCafe {
         submitButton = new Button();
         submitButton.setText("Potvrdit");
         submitButton.setOnAction(event -> {
-            //Validace dat
+            //Data na string do promenych
             String nameString = nameField.getText();
             String addressString = addressField.getText();
             String regionString = (String) regionBox.getSelectionModel().getSelectedItem();
@@ -121,6 +121,7 @@ public class EditCafe {
             if (regionString == null) {
                 regionString = "";
             }
+            //Validace dat
             boolean nameValid = database.validData("cafe", nameString);
             boolean addressValid = database.validData("cafe", addressString);
             boolean regionValid = database.validData("cafe", regionString);
@@ -129,7 +130,7 @@ public class EditCafe {
             boolean coffeeBrandValid = database.validData("cafe", coffeeBrandString);
             boolean eventValid = database.validData("length150", eventString);
             boolean offerValid = database.validData("length150", offerString);
-
+            //Validace v poradku ->
             if(nameValid && addressValid && regionValid && shortDescriptionValid && descriptionValid && coffeeBrandValid && eventValid && offerValid){
                 String sql;
                 if (idCafe == 99999999) {

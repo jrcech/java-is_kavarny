@@ -160,7 +160,7 @@ public class DetailCafe {
         borderPane.setCenter(gridPane);
 
         detailStage = new Stage();
-        Scene scene = new Scene(borderPane, 400, 780);
+        Scene scene = new Scene(borderPane, 400, 500);
         detailStage.setTitle("Aplikace káva - Detail Kavárny");
         detailStage.setScene(scene);
         detailStage.show();
