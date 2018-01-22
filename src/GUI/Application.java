@@ -14,6 +14,7 @@ public class Application {
 
     private Stage appStage;
     private MenuPanel menuPanel;
+    private SearchPanel searchPanel;
 
     public Application(Stage lastStage, Idatabase database){
 
@@ -28,19 +29,24 @@ public class Application {
         appStage.setScene(scene);
 
 
-        Label welcome = new Label();
-        welcome.setText("Vítejte ");
-        FlowPane welcomePane = new FlowPane();
-        welcomePane.getChildren().addAll(welcome);
-        welcomePane.setAlignment(Pos.CENTER);
-        // PANEL - vysledky hledani
+        Label welcomeLabel = new Label();
+        welcomeLabel.setText("Vítejte ");
+        Label notFoundLabel = new Label();
+        notFoundLabel.setText("Nic podobného jsme nenalezli, zkuste zadat něco jiného");
+        FlowPane infoPane = new FlowPane();
+        infoPane.getChildren().addAll(welcomeLabel);
+        infoPane.setAlignment(Pos.CENTER);
+
+        //PANEL - vysledky hledani
         ScrollPane searchResults = new ScrollPane();
         searchResults.setFitToWidth(true);
-
-        // PANEL - hledani + nova kavarna
+        //PANEL - hledani field + button
         TextField searchField = new TextField();
         Button searchButton = new Button();
         searchButton.setText("Vyhledat");
+
+
+        //PANEL - button nova kavarna
         Button newCafeButton = new Button();
         newCafeButton.setText("Přidat kavárnu");
         HBox controlsPanel = new HBox(5);
@@ -49,9 +55,24 @@ public class Application {
 
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(controlsPanel, welcomePane);
+        vBox.getChildren().addAll(controlsPanel, infoPane);
+
+        searchPanel = new SearchPanel(appStage, database);
+        //FUNCTION - search button
         searchButton.setOnAction(event -> {
-            vBox.getChildren().addAll(searchResults);
+            String text = searchField.getText();
+            String sql = "SELECT * FROM sql11216990.cafe WHERE name LIKE '%" + text + "%'";
+            boolean databaseOperation = database.getSearchDatabase().databaseOperation("SEARCH", sql);
+            if(databaseOperation){
+                vBox.getChildren().clear();
+                searchResults.setContent(searchPanel);
+                vBox.getChildren().addAll(controlsPanel, infoPane, searchResults);
+            }
+            else {
+                infoPane.getChildren().clear();
+                infoPane.getChildren().addAll(notFoundLabel);
+            }
+
         });
 
 

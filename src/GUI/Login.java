@@ -42,7 +42,7 @@ public class Login {
         TextField passField = new TextField();
         passField.setText("12345Jizzy");
 
-        //Tlacitko - submit
+        //Button - submit
         Button submitButton = new Button();
         submitButton.setText("Přihlásit");
         submitButton.setOnAction(event -> {
@@ -51,8 +51,6 @@ public class Login {
             String sql = "SELECT * FROM sql11216990.person WHERE (username = '" + name + "' AND password = '" + password + "')";
             boolean databaseOperation = database.getSearchDatabase().databaseOperation("LOGIN", sql);
             if (databaseOperation) {
-                sql = "SELECT * FROM sql11216990.person";
-                database.getSearchDatabase().databaseOperation("LOGIN", sql);
                 loginStage.hide();
                 Application app = new Application(loginStage, database);
             } else {
@@ -62,7 +60,7 @@ public class Login {
             }
         });
 
-        //Tlacitko - cancel
+        //Button - cancel
         Button cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
