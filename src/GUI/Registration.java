@@ -1,7 +1,6 @@
 package GUI;
 
 import interfaces.Idatabase;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,18 +18,18 @@ public class Registration {
     private Stage registrationStage;
     private Text titlePersonal;
     private Text titleRegistration;
-    private Label jmenoLabel;
-    private Label prijmeniLabel;
-    private Label userLabel;
+    private Label firstNameLabel;
+    private Label lastNameLabel;
+    private Label usernameLabel;
     private Label emailLabel;
-    private Label passLabel;
-    private Label passConfirmLabel;
-    private TextField jmenoField;
-    private TextField prijmeniField;
-    private TextField userField;
+    private Label passwordLabel;
+    private Label passwordConfirmLabel;
+    private TextField firstNameField;
+    private TextField lastNameField;
+    private TextField usernameField;
     private TextField emailField;
-    private PasswordField passField;
-    private PasswordField passConfirmField;
+    private PasswordField passwordField;
+    private PasswordField passwordConfirmField;
     private Button submitButton;
     private Button cancelButton;
 
@@ -51,22 +50,22 @@ public class Registration {
         titleRegistration.setText("Přihlašovací Údaje:");
 
         //Form - Jmeno
-        jmenoLabel = new Label();
-        jmenoLabel.setText("Jméno:");
-        jmenoField = new TextField();
-        jmenoField.setPromptText("Jan");
+        firstNameLabel = new Label();
+        firstNameLabel.setText("Jméno:");
+        firstNameField = new TextField();
+        firstNameField.setPromptText("Jan");
 
         //Form - Přijmení
-        prijmeniLabel = new Label();
-        prijmeniLabel.setText("Přijmení:");
-        prijmeniField = new TextField();
-        prijmeniField.setPromptText("Novák");
+        lastNameLabel = new Label();
+        lastNameLabel.setText("Přijmení:");
+        lastNameField = new TextField();
+        lastNameField.setPromptText("Novák");
 
         //Form - username
-        userLabel = new Label();
-        userLabel.setText("Nickname:");
-        userField = new TextField();
-        userField.setPromptText("jizzy85");
+        usernameLabel = new Label();
+        usernameLabel.setText("Nickname:");
+        usernameField = new TextField();
+        usernameField.setPromptText("jizzy85");
 
         //Form - email
         emailLabel = new Label();
@@ -75,44 +74,56 @@ public class Registration {
         emailField.setPromptText("jizzy@email.com");
 
         //Form - password
-        passLabel = new Label();
-        passLabel.setText("Heslo:");
-        passField = new PasswordField();
-        passField.setPromptText("password");
+        passwordLabel = new Label();
+        passwordLabel.setText("Heslo:");
+        passwordField = new PasswordField();
+        passwordField.setPromptText("password");
 
         //Form - password znovu
-        passConfirmLabel = new Label();
-        passConfirmLabel.setText("Potvrď heslo:");
-        passConfirmField = new PasswordField();
-        passConfirmField.setPromptText("password");
+        passwordConfirmLabel = new Label();
+        passwordConfirmLabel.setText("Potvrď heslo:");
+        passwordConfirmField = new PasswordField();
+        passwordConfirmField.setPromptText("password");
 
         //Tlacitko - submit
         submitButton = new Button();
         submitButton.setText("Registrovat");
         submitButton.setOnAction(event -> {
-            String jmeno = jmenoField.getText();
-            String prijmeni = prijmeniField.getText();
-            String username = userField.getText();
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            String username = usernameField.getText();
             String email = emailField.getText();
-            String pass = passField.getText();
-            String passConfirm = passConfirmField.getText();
+            String password = passwordField.getText();
+            String passwordConfirm = passwordConfirmField.getText();
 
+            boolean validUsername = database.validData("name", username);
+            boolean validFirstName = database.validData("name", firstName);
+            boolean validLastName = database.validData("name", lastName);
+            boolean validEmail = database.validData("email", email);
+            boolean validPassword = database.validPasswd(password, passwordConfirm);
+
+            //Kontrola volneho username v db
             String sql = "SELECT * FROM sql11216990.person WHERE username='" + username + "'";
             boolean databaseOperation = database.getSearchDatabase().databaseOperation("SELECT", sql);
 
-            if (!databaseOperation) {
-                sql = "INSERT INTO sql11216990.person " + "(username, firstName, lastName, email, password, isAdmin) VALUES (" + "'" + username + "','" + jmeno + "','" + prijmeni + "','" + email + "','" + pass + "', 0" + ")";
-                database.getSearchDatabase().databaseOperation("INSERT", sql);
-                String title = "Registrace úspěšně dokončena";
-                String text = "Můžete se přihlásit";
-                database.alert(title, text);
-                registrationStage.hide();
-                lastStage.show();
+            if (validUsername && validFirstName && validLastName && validEmail && validPassword) {
+                if (!databaseOperation) {
+                    sql = "INSERT INTO sql11216990.person " + "(username, firstName, lastName, email, password, isAdmin) VALUES (" + "'" + username + "','" + firstName + "','" + lastName + "','" + email + "','" + password + "', 0" + ")";
+                    database.getSearchDatabase().databaseOperation("INSERT", sql);
+                    String title = "Registrace úspěšně dokončena";
+                    String text = "Můžete se přihlásit";
+                    database.alert(title, text);
+                    registrationStage.hide();
+                    lastStage.show();
+                } else {
+                    String title = "Registrace se nezdařila";
+                    String text = "Tento nickname již existuje";
+                    database.alert(title, text);
+                    usernameLabel.setStyle("-fx-text-fill: red");
+                }
             } else {
-                String title = "Registrace se nezdařila";
-                String text = "Tento nickname již existuje";
-                database.alert(title, text);
-                userLabel.setStyle("-fx-text-fill: red");
+                //Vypise kde registrace selhala
+                validationError(validUsername, validFirstName, validLastName, validEmail, validPassword);
             }
         });
 
@@ -124,7 +135,7 @@ public class Registration {
             lastStage.show();
         });
 
-        // TilePane - spojeni tlacitek
+        //TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(5);
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
@@ -135,10 +146,10 @@ public class Registration {
         firstGridPane.setHgap(10);
         firstGridPane.setVgap(10);
         firstGridPane.add(titlePersonal,0,0, 2,1);
-        firstGridPane.add(jmenoLabel,0,1);
-        firstGridPane.add(jmenoField,1,1);
-        firstGridPane.add(prijmeniLabel,0,2);
-        firstGridPane.add(prijmeniField,1,2);
+        firstGridPane.add(firstNameLabel,0,1);
+        firstGridPane.add(firstNameField,1,1);
+        firstGridPane.add(lastNameLabel,0,2);
+        firstGridPane.add(lastNameField,1,2);
 
         //GridPane - rozlozeni formulare
         GridPane secondGridPane = new GridPane();
@@ -146,14 +157,14 @@ public class Registration {
         secondGridPane.setHgap(10);
         secondGridPane.setVgap(10);
         secondGridPane.add(titleRegistration,0,0, 2,1);
-        secondGridPane.add(userLabel,0,1);
-        secondGridPane.add(userField,1,1);
+        secondGridPane.add(usernameLabel,0,1);
+        secondGridPane.add(usernameField,1,1);
         secondGridPane.add(emailLabel,0,2);
         secondGridPane.add(emailField,1,2);
-        secondGridPane.add(passLabel,0,3);
-        secondGridPane.add(passField,1,3);
-        secondGridPane.add(passConfirmLabel,0,4);
-        secondGridPane.add(passConfirmField,1,4);
+        secondGridPane.add(passwordLabel,0,3);
+        secondGridPane.add(passwordField,1,3);
+        secondGridPane.add(passwordConfirmLabel,0,4);
+        secondGridPane.add(passwordConfirmField,1,4);
         secondGridPane.add(boxButtons,1,5);
 
         VBox vBox = new VBox();
@@ -170,5 +181,38 @@ public class Registration {
         registrationStage.setTitle("Aplikace káva - Registrace");
         registrationStage.setScene(scene);
         registrationStage.show();
+    }
+
+    //Vypis chyb registrace
+    private void validationError(boolean validUsername,
+                                 boolean validFirstName,
+                                 boolean validLastName,
+                                 boolean validEmail,
+                                 boolean validPasswd) {
+        String error = "Chyba: ";
+        if (!validUsername) {
+            usernameLabel.setStyle("-fx-text-fill: red");
+            error += "\nNickname musí obsahovat 3 až 30 znaků";
+        }
+        if (!validFirstName) {
+            firstNameLabel.setStyle("-fx-text-fill: red");
+            error += "\nJméno musí obsahovat 3 až 30 znaků";
+        }
+        if (!validLastName) {
+            lastNameLabel.setStyle("-fx-text-fill: red");
+            error += "\nPříjmení musí obsahovat 3 až 30 znaků";
+        }
+        if (!validEmail) {
+            emailLabel.setStyle("-fx-text-fill: red");
+            error += "\nEmail musí být ve tvaru exaple@exaple.com";
+        }
+        if (!validPasswd) {
+            passwordLabel.setStyle("-fx-text-fill: red");
+            passwordConfirmLabel.setStyle("-fx-text-fill: red");
+            error += "\nHesla se musí shodovat a musí obsahovat 8 až 30 znaků, " +
+                    "jedno malé písmeno, jedno velké písmeno a jedno číslo";
+        }
+        String title = "Chyba: ";
+        database.alert(title, error);
     }
 }
