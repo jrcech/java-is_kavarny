@@ -26,4 +26,24 @@ public class Rating {
         this.rating = rating;
         this.comment = comment;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getIdCafe() {
+        return idCafe;
+    }
+
+    public int getIdPerson() {
+        return idPerson;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 }
