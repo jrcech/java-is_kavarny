@@ -68,7 +68,7 @@ public class SearchDatabase implements Subject {
                     String coffeeBrand = rs.getString("coffeeBrand");
                     String event = rs.getString("event");
                     String specialOffer = rs.getString("specialOffer");
-                    sql = "SELECT * FROM sql11209113.comment WHERE idCafe='" + id + "'";
+                    sql = "SELECT * FROM sql11216990.rating WHERE idCafe='" + id + "'";
                     statement = connection.prepareStatement(sql);
                     ResultSet rsRating = statement.executeQuery();
                     double rating = 0;
