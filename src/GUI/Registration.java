@@ -134,6 +134,36 @@ public class Registration {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
         //Window - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(vBox);
