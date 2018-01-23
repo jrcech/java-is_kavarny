@@ -45,7 +45,9 @@ public class Application {
         foundLabel = new Label();
         foundLabel.setText("Seznam nalezených kaváren");
         foundLabel.getStyleClass().add("foundLabel");
+
         FlowPane infoPane = new FlowPane();
+        infoPane.getStyleClass().add("infoPane");
         infoPane.getChildren().addAll(welcomeLabel);
         infoPane.setAlignment(Pos.CENTER);
 
@@ -56,12 +58,14 @@ public class Application {
 
         //PANEL - hledani field + button
         searchField = new TextField();
+        searchField.getStyleClass().add("searchField");
         searchButton = new Button();
         searchButton.setText("Vyhledat");
 
 
         //PANEL - button nova kavarna
         newCafeButton = new Button();
+        newCafeButton.getStyleClass().add("newCafeButton");
         newCafeButton.setText("Přidat kavárnu");
         newCafeButton.setOnAction(event -> {
             EditCafe editCafe = new EditCafe(appStage, database, 99999999);
@@ -69,6 +73,7 @@ public class Application {
 
         //CONTROLS PANEL
         HBox controlsPanel = new HBox(10);
+        controlsPanel.getStyleClass().add("searchControlsPanel");
         controlsPanel.setAlignment(Pos.TOP_CENTER);
         if (!database.getSearchDatabase().getLoggedPerson().isAdmin()) {
             controlsPanel.getChildren().addAll(searchField, searchButton);

@@ -28,6 +28,7 @@ public class Main extends Application {
 
         //Tlacitko - prihlaseni
         Button login = new Button();
+        login.getStyleClass().add("submitButton");
 
         login.setText("Přihlášení");
         login.setOnAction(event -> {
