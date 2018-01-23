@@ -59,17 +59,27 @@ public class RatingPanel extends VBox implements Observer  {
 
                 //CAFE Container
                 GridPane ratingPane = new GridPane();
-                ratingPane.setAlignment(Pos.CENTER);
+                ratingPane.setAlignment(Pos.TOP_LEFT);
                 ratingPane.setHgap(5);
                 ratingPane.setVgap(0);
-                ratingPane.add(userLabel,0,0);
-                ratingPane.add(userDataLabel,1,0);
-                ratingPane.add(ratingLabel,0,1);
-                ratingPane.add(ratingDataLabel,1,1);
-                ratingPane.add(commentLabel,0,2);
-                ratingPane.add(commentTextArea,1,2);
+                if(rating.getComment().length() > 0){
+                    ratingPane.add(userLabel,0,0);
+                    ratingPane.add(userDataLabel,1,0);
+                    ratingPane.add(ratingLabel,0,1);
+                    ratingPane.add(ratingDataLabel,1,1);
+                    ratingPane.add(commentLabel,0,2);
+                    ratingPane.add(commentTextArea,1,2);
+                }
+                else{
+                    ratingPane.add(userLabel,0,0);
+                    ratingPane.add(userDataLabel,1,0);
+                    ratingPane.add(ratingLabel,0,1);
+                    ratingPane.add(ratingDataLabel,1,1);
+                }
                 this.getChildren().addAll(ratingPane);
+
+
             }
-        };
+        }
     }
 }

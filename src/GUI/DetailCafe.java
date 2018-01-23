@@ -121,12 +121,15 @@ public class DetailCafe {
 
         //Pridat Rating - Titulek
         Text addRatingTitle = new Text();
-        title.setText("Přidejte vlastní hodnocení");
+        addRatingTitle.setText("Přidejte vlastní hodnocení");
+        //Rating Ostatnich - Titulek
+        Text otherRatingTitle = new Text();
+        otherRatingTitle.setText("Hodnocení ostatních");
         //Form - Rating
         addRatingLabel = new Label();
-        addRatingLabel.setText("Značka kávy: ");
+        addRatingLabel.setText("Hodnocení");
         ComboBox addRatingValue = new ComboBox();
-        addRatingValue.getItems().addAll(5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.5, 0);
+        addRatingValue.getItems().addAll(5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0);
 
         //Form - Comment
         addCommentLabel = new Label();
@@ -235,11 +238,16 @@ public class DetailCafe {
         ratingPane.setContent(ratingPanel);
 
         VBox addRatingWrapper = new VBox();
-        addRatingWrapper.getChildren().addAll(addRatingPane, ratingPane);
+        addRatingWrapper.getChildren().addAll(addRatingPane, otherRatingTitle, ratingPane);
 
         //GridPane - detailni informace o kavarne
         GridPane detailPane = new GridPane();
         detailPane.setAlignment(Pos.CENTER);
+        ColumnConstraints detailCol1 = new ColumnConstraints();
+        detailCol1.setPercentWidth(20);
+        ColumnConstraints detailCol2 = new ColumnConstraints();
+        detailCol2.setPercentWidth(80);
+        detailPane.getColumnConstraints().addAll(detailCol1,detailCol2);
         detailPane.setHgap(10);
         detailPane.setVgap(10);
         detailPane.add(title,0,0, 2,1);
@@ -278,7 +286,7 @@ public class DetailCafe {
 
 
         detailStage = new Stage();
-        Scene scene = new Scene(borderPane, 600, 500);
+        Scene scene = new Scene(borderPane, 700, 500);
         detailStage.setTitle("Aplikace káva - Detail Kavárny");
         detailStage.setScene(scene);
         detailStage.show();
