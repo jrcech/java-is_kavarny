@@ -17,7 +17,6 @@ import logic.Database;
 public class EditCafe {
 
     private Stage editStage;
-    private Database database;
     private Label nameLabel;
     private Label addressLabel;
     private Label regionLabel;
@@ -38,7 +37,6 @@ public class EditCafe {
     private Button cancelButton;
 
     public EditCafe(Stage lastStage, Database database, int idCafe){
-        this.database = database;
         lastStage.hide();
 
         //Titulek
