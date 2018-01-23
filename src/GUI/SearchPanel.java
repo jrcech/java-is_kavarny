@@ -4,10 +4,7 @@ import interfaces.Observer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import logic.Cafe;
 import logic.Database;
@@ -58,6 +55,7 @@ public class SearchPanel extends VBox implements Observer {
             //BUTTON - detail kavarny
             detailButton = new Button();
             detailButton.setText("Detail");
+            detailButton.getStyleClass().add("detailButton");
             detailButton.setOnAction(event -> {
                 int id = cafe.getId();
                 DetailCafe detailCafe = new DetailCafe(lastStage,database,id);
@@ -69,7 +67,7 @@ public class SearchPanel extends VBox implements Observer {
 
             //CAFE Container
             GridPane cafePane = new GridPane();
-            cafePane.setAlignment(Pos.CENTER);
+            cafePane.setAlignment(Pos.TOP_LEFT);
             cafePane.setHgap(5);
             cafePane.setVgap(0);
             cafePane.add(nameLabel,0,0);
@@ -80,11 +78,20 @@ public class SearchPanel extends VBox implements Observer {
             cafePane.add(ratingDataLabel,1,2);
 
             //PANEL - CAFE + BUTTON
-            HBox hBox = new HBox();
-            hBox.setSpacing(25);
-            hBox.getChildren().addAll(cafePane, buttonPane);
+            GridPane searchPanelLayout = new GridPane();
+            searchPanelLayout.getStyleClass().add("searchPanelLayout");
+            searchPanelLayout.setAlignment(Pos.BASELINE_LEFT);
+            ColumnConstraints detailCol1 = new ColumnConstraints();
+            detailCol1.setPercentWidth(80);
+            ColumnConstraints detailCol2 = new ColumnConstraints();
+            detailCol2.setPercentWidth(20);
+            searchPanelLayout.getColumnConstraints().addAll(detailCol1,detailCol2);
+            searchPanelLayout.setHgap(10);
+            searchPanelLayout.setVgap(0);
+            searchPanelLayout.add(cafePane,0,0);
+            searchPanelLayout.add(buttonPane,1,0);
 
-            this.getChildren().add(hBox);
+            this.getChildren().add(searchPanelLayout);
         }
 
     }

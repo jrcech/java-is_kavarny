@@ -28,6 +28,7 @@ public class Application {
 
         //Window - setup
         BorderPane borderPane = new BorderPane();
+        borderPane.getStyleClass().add("borderPane");
         appStage = new Stage();
         menuPanel = new MenuPanel(this, appStage, borderPane);
         appStage.setTitle("Aplikace káva - Hlavní obrazovka");

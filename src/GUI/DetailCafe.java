@@ -48,7 +48,7 @@ public class DetailCafe {
         ratingPanel = new RatingPanel(database, idCafe);
 
         //aktualizace dat
-        String sql1 = "SELECT * FROM sql11216990.cafe WHERE id='" + idCafe + "'";
+        String sql1 = "SELECT * FROM sql11216990.cafe";
         database.operate("SEARCH", sql1);
         //Titulek
         Text title = new Text();
@@ -106,8 +106,6 @@ public class DetailCafe {
         eventField = new TextField();
         eventField.setEditable(false);
 
-
-
         //Tlacitko - edit cafe
         editButton = new Button();
         editButton.setText("Upravit");
@@ -141,7 +139,6 @@ public class DetailCafe {
         addCommentArea = new TextArea();
         addCommentArea.setWrapText(true);
         addCommentArea.setPrefRowCount(4);
-
 
         //Tlacitko - submit rating
         addRatingButton = new Button();
