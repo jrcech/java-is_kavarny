@@ -192,7 +192,13 @@ public class Registration {
         registrationStage.show();
     }
 
-    //Vypis chyb registrace
+    /** Vypsani chyb validace registrace
+     * @param validUsername Je nickname validni
+     * @param validFirstName Je jmeno validni
+     * @param validLastName Je prijmeni validni
+     * @param validEmail Je email validni
+     * @param validPasswd Je heslo validni
+     */
     private void validationError(boolean validUsername,
                                  boolean validFirstName,
                                  boolean validLastName,
