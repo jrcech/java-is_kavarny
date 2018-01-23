@@ -37,6 +37,7 @@ public class Main extends Application {
 
         //Tlacitko - registrace
         Button registration = new Button();
+        registration.getStyleClass().add("blueButton");
         registration.setText("Registrace");
         registration.setOnAction(event -> {
             Registration reg = new Registration(primaryStage);

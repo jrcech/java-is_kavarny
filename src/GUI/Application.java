@@ -28,6 +28,7 @@ public class Application {
 
         //Window - setup
         BorderPane borderPane = new BorderPane();
+        borderPane.getStyleClass().add("borderPane");
         appStage = new Stage();
         menuPanel = new MenuPanel(this, appStage, borderPane);
         appStage.setTitle("Aplikace káva - Hlavní obrazovka");
@@ -65,7 +66,7 @@ public class Application {
 
         //PANEL - button nova kavarna
         newCafeButton = new Button();
-        newCafeButton.getStyleClass().add("newCafeButton");
+        newCafeButton.getStyleClass().add("blueButton");
         newCafeButton.setText("Přidat kavárnu");
         newCafeButton.setOnAction(event -> {
             EditCafe editCafe = new EditCafe(appStage, database, 99999999);
