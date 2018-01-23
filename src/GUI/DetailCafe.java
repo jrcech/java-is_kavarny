@@ -306,12 +306,14 @@ public class DetailCafe {
         detailStage.setResizable(false);
     }
 
-    //Vypis chyb registrace
+    /** Vypsani chyb validace komentaru
+     * @param commentValid Je komentar validni
+     */
     private void validationError(boolean commentValid) {
         String error = "Chyba: ";
         if (!commentValid) {
             addCommentLabel.setStyle("-fx-text-fill: red");
-            error += "\nKoemntář musí mít maximálně 150 znaků";
+            error += "\nKomentář musí mít maximálně 150 znaků";
         }
 
         String title = "Chyba: ";

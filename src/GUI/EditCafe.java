@@ -16,6 +16,7 @@ import logic.Database;
 
 public class EditCafe {
 
+    private Database database;
     private Stage editStage;
     private Label nameLabel;
     private Label addressLabel;
@@ -37,6 +38,7 @@ public class EditCafe {
     private Button cancelButton;
 
     public EditCafe(Stage lastStage, Database database, int idCafe){
+        this.database = database;
         lastStage.hide();
 
         //Titulek
@@ -58,6 +60,7 @@ public class EditCafe {
         regionLabel.setText("Kraj:");
         ComboBox regionBox = new ComboBox();
         regionBox.getItems().addAll("Praha", "Středočeský Kraj", "Jihočeský Kraj", "Plzeňský kraj", "Karlovarský kraj", "Ústecký kraj", "Liberecký kraj", "Královehradecký kraj", "Pardubický kraj", "kraj Vysočina", "Jihomoravský kraj", "Olomoucký kraj", "Moravskoslezský kraj", "Zlínský kraj");
+        regionBox.getSelectionModel().selectFirst();
 
         //Form - Popis
         shortDescLabel = new Label();
@@ -121,14 +124,13 @@ public class EditCafe {
             //Validace dat
             boolean nameValid = database.validData("cafe", nameString);
             boolean addressValid = database.validData("cafe", addressString);
-            boolean regionValid = database.validData("cafe", regionString);
             boolean shortDescriptionValid = database.validData("cafe", shortDescriptionString);
             boolean descriptionValid = database.validData("desc", descriptionString);
             boolean coffeeBrandValid = database.validData("cafe", coffeeBrandString);
             boolean eventValid = database.validData("length150", eventString);
             boolean offerValid = database.validData("length150", offerString);
             //Validace v poradku ->
-            if(nameValid && addressValid && regionValid && shortDescriptionValid && descriptionValid && coffeeBrandValid && eventValid && offerValid){
+            if(nameValid && addressValid && shortDescriptionValid && descriptionValid && coffeeBrandValid && eventValid && offerValid){
                 String sql;
                 if (idCafe == 99999999) {
                     sql = "INSERT INTO sql11216990.cafe " + "(name, shortDescription, description, address, region, coffeeBrand, event, specialOffer) VALUES ("
@@ -151,6 +153,9 @@ public class EditCafe {
                     String textAlert = "Něco je špatně, zkuste to prosím později.";
                     database.alert(titleAlert, textAlert);
                 }
+            } else {
+                //Vypise kde pridani kavarny selhalo
+                validationError(nameValid, addressValid, shortDescriptionValid, descriptionValid, coffeeBrandValid, eventValid, offerValid);
             }
 
         });
@@ -202,5 +207,48 @@ public class EditCafe {
         editStage.setTitle("Aplikace káva - Edit kavárny");
         editStage.setScene(scene);
         editStage.show();
+    }
+
+    /** Vypsani chyb validace kavaren
+     * @param nameValid Je nazev validni
+     * @param addressValid Je adresa validni
+     * @param shortDescriptionValid Je kratky popis validni
+     * @param descriptionValid Je popis validni
+     * @param coffeeBrandValid Je znacka validni
+     * @param eventValid Je udalost validni
+     * @param offerValid Je specialni nabidka validni
+     */
+    private void validationError(boolean nameValid, boolean addressValid, boolean shortDescriptionValid, boolean descriptionValid, boolean coffeeBrandValid, boolean eventValid, boolean offerValid) {
+        String error = "Chyba: ";
+        if (!nameValid) {
+            nameLabel.setStyle("-fx-text-fill: red");
+            error += "\nNázev musí obsahovat 3 až 50 znaků";
+        }
+        if (!addressValid) {
+            addressLabel.setStyle("-fx-text-fill: red");
+            error += "\nAdresa musí obsahovat 3 až 50 znaků";
+        }
+        if (!shortDescriptionValid) {
+            shortDescLabel.setStyle("-fx-text-fill: red");
+            error += "\nKrátký popis musí obsahovat 3 až 50 znaků";
+        }
+        if (!descriptionValid) {
+            descLabel.setStyle("-fx-text-fill: red");
+            error += "\nPopis musí obsahovat 3 až 350 znaků";
+        }
+        if (!coffeeBrandValid) {
+            coffeeBrandLabel.setStyle("-fx-text-fill: red");
+            error += "\nZnačka musí obsahovat 3 až 50 znaků";
+        }
+        if (!eventValid) {
+            eventLabel.setStyle("-fx-text-fill: red");
+            error += "\nUdálost musí obsahovat maximálně 150 znaků";
+        }
+        if (!offerValid) {
+            offerLabel.setStyle("-fx-text-fill: red");
+            error += "\nSpeciální nabídka musí obsahovat maximálně 150 znaků";
+        }
+        String title = "Chyba: ";
+        database.alert(title, error);
     }
 }
