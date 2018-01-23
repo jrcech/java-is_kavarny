@@ -219,7 +219,7 @@ public class EditCafe {
      * @param offerValid Je specialni nabidka validni
      */
     private void validationError(boolean nameValid, boolean addressValid, boolean shortDescriptionValid, boolean descriptionValid, boolean coffeeBrandValid, boolean eventValid, boolean offerValid) {
-        String error = "Chyba: ";
+        String error = "Chyba";
         if (!nameValid) {
             nameLabel.setStyle("-fx-text-fill: red");
             error += "\nNázev musí obsahovat 3 až 50 znaků";

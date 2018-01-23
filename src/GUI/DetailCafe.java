@@ -307,7 +307,7 @@ public class DetailCafe {
      * @param commentValid Je komentar validni
      */
     private void validationError(boolean commentValid) {
-        String error = "Chyba: ";
+        String error = "Chyba";
         if (!commentValid) {
             addCommentLabel.setStyle("-fx-text-fill: red");
             error += "\nKomentář musí mít maximálně 150 znaků";
