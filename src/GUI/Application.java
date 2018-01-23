@@ -37,7 +37,7 @@ public class Application {
 
 
         welcomeLabel = new Label();
-        welcomeLabel.setText("Vítejte uživateli " + database.getOperateDatabase().getLoggedPerson().getUsername());
+        welcomeLabel.setText("Vítejte uživateli " + database.getLoggedPerson().getUsername());
         welcomeLabel.getStyleClass().add("welcomeLabel");
         notFoundLabel = new Label();
         notFoundLabel.setText("Nic podobného jsme nenalezli, zkuste zadat něco jiného");
@@ -75,7 +75,7 @@ public class Application {
         HBox controlsPanel = new HBox(10);
         controlsPanel.getStyleClass().add("searchControlsPanel");
         controlsPanel.setAlignment(Pos.TOP_CENTER);
-        if (!database.getOperateDatabase().getLoggedPerson().isAdmin()) {
+        if (!database.getLoggedPerson().isAdmin()) {
             controlsPanel.getChildren().addAll(searchField, searchButton);
         } else {
             controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
@@ -90,7 +90,7 @@ public class Application {
         searchButton.setOnAction(event -> {
             String text = searchField.getText();
             String sql = "SELECT * FROM sql11216990.cafe WHERE name LIKE '%" + text + "%'";
-            boolean databaseOperation = database.getOperateDatabase().databaseOperation("SEARCH", sql);
+            boolean databaseOperation = database.operate("SEARCH", sql);
             if(databaseOperation){
                 vBox.getChildren().clear();
                 searchResults.setContent(searchPanel);

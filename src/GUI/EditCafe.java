@@ -90,7 +90,7 @@ public class EditCafe {
 
         //Pokud neni kavarna nova (tzn nema id 99999999), vyplni se udaje z datavaze
         if (idCafe != 99999999) {
-            for (Cafe cafe : database.getOperateDatabase().getCafe()) {
+            for (Cafe cafe : database.getCafe()) {
                 if (idCafe == cafe.getId()) {
                     nameField.setText(cafe.getName());
                     addressField.setText(cafe.getAddress());
@@ -139,7 +139,7 @@ public class EditCafe {
                     sql = "UPDATE sql11216990.cafe SET name='" + nameString + "', shortDescription='" + shortDescriptionString + "', description='" + descriptionString + "', address='" + addressString + "', region='" + regionString + "', coffeeBrand='" + coffeeBrandString + "', event='" + eventString + "', specialOffer='" + offerString + "' WHERE cafe.id=" + idCafe ;
 
                 }
-                boolean databaseOperation = database.getOperateDatabase().databaseOperation("UPDATE", sql);
+                boolean databaseOperation = database.operate("UPDATE", sql);
                 if (databaseOperation) {
                     String titleAlert = "Změna byla uložena";
                     String textAlert = "Nová data byla zapsána do databáze.";

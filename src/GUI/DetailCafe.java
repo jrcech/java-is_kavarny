@@ -44,12 +44,12 @@ public class DetailCafe {
 
         this.database = database;
         //ID prihlasene osoby
-        int idPerson = database.getOperateDatabase().getLoggedPerson().getId();
+        int idPerson = database.getLoggedPerson().getId();
         ratingPanel = new RatingPanel(database, idCafe);
 
         //aktualizace dat
         String sql1 = "SELECT * FROM sql11216990.cafe WHERE id='" + idCafe + "'";
-        database.getOperateDatabase().databaseOperation("SEARCH", sql1);
+        database.operate("SEARCH", sql1);
         //Titulek
         Text title = new Text();
         title.setText("Detailní údaje kavárny");
@@ -157,7 +157,7 @@ public class DetailCafe {
             boolean commentValid = database.validData("length150", comment);
             if(ratingValid && commentValid){
                 String sql = "SELECT * FROM sql11216990.rating WHERE idCafe='" + idCafe + "' AND idPerson='" + idPerson + "'";
-                boolean databaseOperation = database.getOperateDatabase().databaseOperation("SELECT", sql);
+                boolean databaseOperation = database.operate("SELECT", sql);
 
                 if(!databaseOperation){
                     sql = "INSERT INTO sql11216990.rating " + "(idCafe, idPerson, rating, comment) VALUES ('" + idCafe + "','" + idPerson + "','" + rating + "','" + comment + "')";
@@ -165,9 +165,9 @@ public class DetailCafe {
                 else {
                     sql = "UPDATE sql11216990.rating SET idCafe='" + idCafe + "', idPerson='" + idPerson + "', rating='" + rating + "', comment='" + comment + "' WHERE idCafe='" + idCafe + "' AND idPerson='" + idPerson + "'";
                 }
-                databaseOperation = database.getOperateDatabase().databaseOperation("UPDATE", sql);
+                databaseOperation = database.operate("UPDATE", sql);
                 if (databaseOperation) {
-                    database.getOperateDatabase().setNewRating(idPerson, idCafe, idPerson, rating, comment);
+                    database.setNewRating(idPerson, idCafe, idPerson, rating, comment);
                     String titleAlert = "Vaše hodnocení bylo uloženo";
                     String textAlert = "Vaše hodnocení bylo uloženo do systému. Děkujeme";
                     database.alert(titleAlert, textAlert);
@@ -182,7 +182,7 @@ public class DetailCafe {
         });
 
         //LOOP - Priradi hodnoty do formulare
-        for (Cafe cafe : database.getOperateDatabase().getCafe()) {
+        for (Cafe cafe : database.getCafe()) {
             if (idCafe == cafe.getId()) {
                 nameField.setText(cafe.getName());
                 addressField.setText(cafe.getAddress());
@@ -192,7 +192,7 @@ public class DetailCafe {
                 coffeeBrandField.setText(cafe.getCoffeeBrand());
                 eventField.setText(cafe.getEvent());
                 offerField.setText(cafe.getSpecialOffer());
-                for (Rating rating : database.getOperateDatabase().getRating()) {
+                for (Rating rating : database.getRating()) {
                     if (idCafe == rating.getIdCafe() && idPerson == rating.getIdPerson()) {
                         addCommentArea.setText(rating.getComment());
                         addRatingValue.setValue(rating.getRating());
@@ -224,7 +224,7 @@ public class DetailCafe {
         // TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(5);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
-        if (!database.getOperateDatabase().getLoggedPerson().isAdmin()) {
+        if (!database.getLoggedPerson().isAdmin()) {
             boxButtons.getChildren().addAll(cancelButton);
         } else {
             boxButtons.getChildren().addAll(editButton, cancelButton, deleteButton);

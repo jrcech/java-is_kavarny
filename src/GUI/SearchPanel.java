@@ -28,14 +28,14 @@ public class SearchPanel extends VBox implements Observer {
     public SearchPanel(Stage lastStage, Database database){
         this.lastStage = lastStage;
         this.database = database;
-        database.getOperateDatabase().registerObserver(this);
+        database.registerObserver(this);
         update();
     }
 
     @Override
     public void update(){
         this.getChildren().clear();
-        for(Cafe cafe: database.getOperateDatabase().getCafe()){
+        for(Cafe cafe: database.getCafe()){
 
             //LABEL - nazev kavarny
             nameLabel = new Label();

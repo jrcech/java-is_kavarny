@@ -19,7 +19,7 @@ public class DeleteCafe {
 
             //Smazani kavarny z databaze
             String sql = "DELETE FROM sql11216990.cafe WHERE cafe.id='" + idCafe + "'";
-            boolean databaseOperation = database.getOperateDatabase().databaseOperation("DELETE", sql);
+            boolean databaseOperation = database.operate("DELETE", sql);
 
             //Vysledek pozadavku smazani
             if (databaseOperation) {

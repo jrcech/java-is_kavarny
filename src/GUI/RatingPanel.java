@@ -23,14 +23,14 @@ public class RatingPanel extends VBox implements Observer  {
     public RatingPanel(Database database, int id){
         this.database = database;
         this.id = id;
-        database.getOperateDatabase().registerObserver(this);
+        database.registerObserver(this);
         update();
     }
 
     @Override
     public void update(){
         this.getChildren().clear();
-        for(Rating rating : database.getOperateDatabase().getRating()){
+        for(Rating rating : database.getRating()){
             if(rating.getIdCafe() == id){
 
                 //LABEL - Uzivatel
@@ -39,9 +39,9 @@ public class RatingPanel extends VBox implements Observer  {
                 Label userDataLabel = new Label();
 
                 String sql = "SELECT * FROM sql11216990.person";
-                database.getOperateDatabase().databaseOperation("LOGIN", sql);
+                database.operate("LOGIN", sql);
 
-                for (Person person : database.getOperateDatabase().getPerson()) {
+                for (Person person : database.getPerson()) {
                     if (person.getId() == rating.getIdPerson()) {
                         userDataLabel.setText(person.getUsername());
                         break;
@@ -82,7 +82,7 @@ public class RatingPanel extends VBox implements Observer  {
                     ratingPane.add(ratingDataLabel,1,1);
                     ratingPane.add(commentLabel,0,2);
                     ratingPane.add(commentTextArea,1,2);
-                    if (database.getOperateDatabase().getLoggedPerson().isAdmin() || database.getOperateDatabase().getLoggedPerson().getId() == rating.getIdPerson()) {
+                    if (database.getLoggedPerson().isAdmin() || database.getLoggedPerson().getId() == rating.getIdPerson()) {
                         ratingPane.add(deleteButton,1,3);
                     }
                 }
@@ -91,7 +91,7 @@ public class RatingPanel extends VBox implements Observer  {
                     ratingPane.add(userDataLabel,1,0);
                     ratingPane.add(ratingLabel,0,1);
                     ratingPane.add(ratingDataLabel,1,1);
-                    if (database.getOperateDatabase().getLoggedPerson().isAdmin() || database.getOperateDatabase().getLoggedPerson().getId() == rating.getIdPerson()) {
+                    if (database.getLoggedPerson().isAdmin() || database.getLoggedPerson().getId() == rating.getIdPerson()) {
                         ratingPane.add(deleteButton,1,3);
                     }
                 }
