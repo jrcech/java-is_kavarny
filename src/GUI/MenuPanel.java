@@ -53,8 +53,8 @@ public class MenuPanel extends MenuBar {
                     "Tým Kávoholiků:\n"+
                     "Vítězslav Slavík\n" +
                     "Jiří Čech\n" +
-                    "Petra Puškárová" +
-                    "Katrin Medovarská" +
+                    "Petra Puškárová\n" +
+                    "Katrin Medovarská\n" +
                     "Nikola Trníková");
             oProgramu.initOwner(appStage);
             oProgramu.showAndWait();
