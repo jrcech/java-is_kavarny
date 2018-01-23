@@ -44,6 +44,7 @@ public class EditCafe {
         //Titulek
         Text title = new Text();
         title.setText("Vyplňte údaje kavárny");
+        title.getStyleClass().add("title");
 
         //Form - Nazev
         nameLabel = new Label();
@@ -106,6 +107,7 @@ public class EditCafe {
 
         //Tlacitko - submit
         submitButton = new Button();
+        submitButton.getStyleClass().add("submitButton");
         submitButton.setText("Potvrdit");
         submitButton.setOnAction(event -> {
             //Data na string do promenych
@@ -167,7 +169,8 @@ public class EditCafe {
 
 
         // TilePane - spojeni tlacitek
-        HBox boxButtons = new HBox(5);
+        HBox boxButtons = new HBox(15);
+        boxButtons.getStyleClass().add("registrationBoxButtons");
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
@@ -175,7 +178,7 @@ public class EditCafe {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
-        gridPane.setVgap(10);
+        gridPane.setVgap(15);
         gridPane.add(title,0,0, 2,1);
         gridPane.add(nameLabel,0,1);
         gridPane.add(nameField,1,1);
@@ -198,7 +201,8 @@ public class EditCafe {
         //Window - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
-        Scene scene = new Scene(borderPane, 450, 400);
+        Scene scene = new Scene(borderPane, 350, 450);
+        scene.getStylesheets().add("styles/styles.css");
 
         editStage = new Stage();
         editStage.setTitle("Aplikace káva - Edit kavárny");
