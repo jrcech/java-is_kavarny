@@ -46,6 +46,10 @@ public class DetailCafe {
         //ID prihlasene osoby
         int idPerson = database.getSearchDatabase().getLoggedPerson().getId();
         ratingPanel = new RatingPanel(database, idCafe);
+
+        //aktualizace dat
+        String sql1 = "SELECT * FROM sql11216990.cafe WHERE id='" + idCafe + "'";
+        database.getSearchDatabase().databaseOperation("SEARCH", sql1);
         //Titulek
         Text title = new Text();
         title.setText("Detailní údaje kavárny");
@@ -174,6 +178,7 @@ public class DetailCafe {
                     database.alert(titleAlert, textAlert);
                 }
             }
+
         });
 
         //LOOP - Priradi hodnoty do formulare
