@@ -103,12 +103,12 @@ public class Registration {
 
             //Kontrola volneho username v db
             String sql = "SELECT * FROM sql11216990.person WHERE username='" + username + "'";
-            boolean databaseOperation = database.getSearchDatabase().databaseOperation("SELECT", sql);
+            boolean databaseOperation = database.getOperateDatabase().databaseOperation("SELECT", sql);
 
             if (validUsername && validFirstName && validLastName && validEmail && validPassword) {
                 if (!databaseOperation) {
                     sql = "INSERT INTO sql11216990.person " + "(username, firstName, lastName, email, password, isAdmin) VALUES (" + "'" + username + "','" + firstName + "','" + lastName + "','" + email + "','" + password + "', 0" + ")";
-                    database.getSearchDatabase().databaseOperation("INSERT", sql);
+                    database.getOperateDatabase().databaseOperation("UPDATE", sql);
                     String title = "Registrace úspěšně dokončena";
                     String text = "Můžete se přihlásit";
                     database.alert(title, text);

@@ -5,34 +5,31 @@ import interfaces.Subject;
 import java.sql.*;
 import java.util.*;
 
-/** Class SearchDatabase
- *
+/** Class OperateDatabase
  * @author cecj02
  * @version ZS 2017
- *
  */
-public class SearchDatabase implements Subject {
+public class OperateDatabase implements Subject {
 
     private List<Observer> listObserveru = new ArrayList<>();
-    private Set<Cafe> dataCafe = new HashSet<>();
-    private Set<Rating> dataRating = new HashSet<>();
-    private Set<Person> dataPerson = new HashSet<>();
+    private Set<Cafe> hashCafe = new HashSet<>();
+    private Set<Rating> hashRating = new HashSet<>();
+    private Set<Person> hashPerson = new HashSet<>();
     private Person person;
+    private boolean isLoggedIn;
     private final String DB_DRIVER = "com.mysql.jdbc.Driver";
     private final String DB_CONNECTION = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11216990?useUnicode=true&characterEncoding=UTF-8";
     private final String DB_USER = "sql11216990";
     private final String DB_PASSWORD = "76HIY8tGu2";
-    private boolean first;
 
     /** Constructor
-     *
+     * Nastavi isLoggedIn pro prihlaseneho uzivatele
      */
-    public SearchDatabase() {
-        first = true;
+    public OperateDatabase() {
+        isLoggedIn = true;
     }
 
     /** Operace s databazi
-     *
      * @param option Typ operace
      * @param sql SQL dotaz
      * @return true – uspesna operace s db
@@ -41,13 +38,15 @@ public class SearchDatabase implements Subject {
         boolean value = false;
         Connection connection;
         PreparedStatement statement = null;
+
         try {
+            //Pripojeni k databazi
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
             ResultSet resultSet;
             if (option.equals("SEARCH")) {
-                dataCafe.clear();
-                dataRating.clear();
+                hashCafe.clear();
+                hashRating.clear();
                 statement = connection.prepareStatement(sql);
                 resultSet = statement.executeQuery();
                 if (resultSet.isBeforeFirst()) {
@@ -63,24 +62,34 @@ public class SearchDatabase implements Subject {
                     String coffeeBrand = resultSet.getString("coffeeBrand");
                     String event = resultSet.getString("event");
                     String specialOffer = resultSet.getString("specialOffer");
+                    
+                    //Hodnoceni pro dano kavarnu
                     sql = "SELECT * FROM sql11216990.rating WHERE idCafe='" + id + "'";
                     statement = connection.prepareStatement(sql);
-                    ResultSet rsRating = statement.executeQuery();
+                    ResultSet resultSetRating = statement.executeQuery();
                     double rating = 0;
                     double count = 0;
-                    while (rsRating.next()) {
-                        int idRating = rsRating.getInt("id");
-                        int idCafe = rsRating.getInt("idCafe");
-                        int idPerson = rsRating.getInt("idPerson");
-                        double commentRating = rsRating.getDouble("rating");
-                        String comment = rsRating.getString("comment");
-                        rating += commentRating;
+                    while (resultSetRating.next()) {
+                        int idRating = resultSetRating.getInt("id");
+                        int idCafe = resultSetRating.getInt("idCafe");
+                        int idPerson = resultSetRating.getInt("idPerson");
+                        double ratingValue = resultSetRating.getDouble("rating");
+                        String comment = resultSetRating.getString("comment");
+                        
+                        //Pricteni hodnoceni a inkrementace poctu
+                        rating += ratingValue;
                         count++;
-                        dataRating.add(new Rating(idRating, idCafe, idPerson, commentRating, comment));
+                        
+                        //Pridani hodnoceni do hashe
+                        hashRating.add(new Rating(idRating, idCafe, idPerson, ratingValue, comment));
                     }
+                    
+                    //Vypocet prumerneho hodnoceni kavarny
                     rating = rating / count;
                     rating = (int) Math.round(rating * 100) / (double) 100;
-                    dataCafe.add(new Cafe(id, name, shortDescription, description, rating, address, region, coffeeBrand, event, specialOffer));
+                    
+                    //Pridani kavarny do hashe
+                    hashCafe.add(new Cafe(id, name, shortDescription, description, rating, address, region, coffeeBrand, event, specialOffer));
                 }
                 notifyAllObservers();
             }
@@ -99,30 +108,25 @@ public class SearchDatabase implements Subject {
                     value = true;
                 }
             }
-            if (option.equals("INSERT")) {
-                statement = connection.prepareStatement(sql);
-                statement.executeUpdate();
-                value = true;
-            }
-            if (option.equals("DELETE")) {
+            if (option.equals("UPDATE") || option.equals("DELETE")) {
                 statement = connection.prepareStatement(sql);
                 statement.executeUpdate();
                 value = true;
             }
             statement.close();
             connection.close();
-        } catch (SQLException | NullPointerException | ClassNotFoundException ex) {
-            System.out.println(ex);
+        } catch (SQLException | NullPointerException | ClassNotFoundException exception) {
+            System.out.println(exception);
         }
         return value;
     }
 
     /** Nastaveni tridy Person na zaklade vysledku sql dotazu
-     * 
      * @param resultSet Vysledek sql dotazu
      */
     private void personSetData(ResultSet resultSet) {
         try {
+            //Proiterovani vysledkem SQL dotazu
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
@@ -132,11 +136,13 @@ public class SearchDatabase implements Subject {
                 Boolean isAdmin = resultSet.getBoolean("isAdmin");
 
                 //Kontrola prihlaseneho uzivatele
-                if (first) {
+                if (isLoggedIn) {
+                    //Vytvoreni instance Person pro prihlaseneho uzivatele
                     person = new Person(id, username, firstName, lastName, email, isAdmin);
-                    first = false;
+                    isLoggedIn = false;
                 } else {
-                    dataPerson.add(new Person(id, username, lastName, firstName, email, isAdmin));
+                    //Pridani osoby do hashe
+                    hashPerson.add(new Person(id, username, lastName, firstName, email, isAdmin));
                 }
             }
         } catch (SQLException exception) {
@@ -145,7 +151,6 @@ public class SearchDatabase implements Subject {
     }
 
     /** Ziskani prihlasene osoby
-     * 
      * @return person Osoba
      */
     public Person getLoggedPerson() {
@@ -153,7 +158,6 @@ public class SearchDatabase implements Subject {
     }
 
     /** Nastaveni noveho hodnoceni
-     *
      * @param idRating ID hodnoceni
      * @param idCafe ID kavarny
      * @param idPerson ID osoby
@@ -161,35 +165,31 @@ public class SearchDatabase implements Subject {
      * @param comment Komentar
      */
     public void setNewRating(int idRating, int idCafe, int idPerson, double commentRating, String comment) {
-        dataRating.add(new Rating(idRating, idCafe, idPerson, commentRating, comment));
+        hashRating.add(new Rating(idRating, idCafe, idPerson, commentRating, comment));
     }
 
     /** Ziskani dat kavaren
-     *
-     * @return dataCafe Kolekce dat kavaren
+     * @return hashCafe Kolekce dat kavaren
      */
     public Collection<Cafe> getCafe() {
-        return Collections.unmodifiableCollection(dataCafe);
+        return Collections.unmodifiableCollection(hashCafe);
     }
 
     /** Ziskani dat hodnoceni
-     *
-     * @return dataRating Kolekce dat hodnoceni
+     * @return hashRating Kolekce dat hodnoceni
      */
     public Collection<Rating> getRating() {
-        return Collections.unmodifiableCollection(dataRating);
+        return Collections.unmodifiableCollection(hashRating);
     }
 
     /** Ziskani seznamu osob
-     *
-     * @return dataPerson Kolekce osob
+     * @return hashPerson Kolekce osob
      */
     public Collection<Person> getPerson() {
-        return Collections.unmodifiableCollection(dataPerson);
+        return Collections.unmodifiableCollection(hashPerson);
     }
 
     /** Pridani observeru
-     *
      * @param observer Observer
      */
     @Override
@@ -198,7 +198,6 @@ public class SearchDatabase implements Subject {
     }
 
     /** Odebrani observeru
-     *
      * @param observer Observer
      */
     @Override
@@ -207,7 +206,6 @@ public class SearchDatabase implements Subject {
     }
 
     /** Aktualizace observeru
-     *
      */
     @Override
     public void notifyAllObservers() {

@@ -11,7 +11,7 @@ import javafx.scene.control.Alert;
  */
 public class Database {
 
-    private SearchDatabase searchDatabase = new SearchDatabase();
+    private OperateDatabase operateDatabase = new OperateDatabase();
 
     /**
      *
@@ -90,10 +90,10 @@ public class Database {
 
     /**
      *
-     * @return vrací třídu SearchDatabase
+     * @return vrací třídu OperateDatabase
      */
-    public SearchDatabase getSearchDatabase() {
-        return searchDatabase;
+    public OperateDatabase getOperateDatabase() {
+        return operateDatabase;
     }
 
 }

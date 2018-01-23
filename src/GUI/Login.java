@@ -54,7 +54,7 @@ public class Login {
             String name = userField.getText();
             String password = passField.getText();
             String sql = "SELECT * FROM sql11216990.person WHERE (username = '" + name + "' AND password = '" + password + "')";
-            boolean databaseOperation = database.getSearchDatabase().databaseOperation("LOGIN", sql);
+            boolean databaseOperation = database.getOperateDatabase().databaseOperation("LOGIN", sql);
             if (databaseOperation) {
                 loginStage.hide();
                 Application app = new Application(loginStage, database);
