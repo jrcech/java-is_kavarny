@@ -134,6 +134,7 @@ public class DetailCafe {
         addRatingLabel.setText("Hodnocení");
         ComboBox addRatingValue = new ComboBox();
         addRatingValue.getItems().addAll(5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0);
+        addRatingValue.getSelectionModel().selectFirst();
 
         //Form - Comment
         addCommentLabel = new Label();
@@ -177,6 +178,9 @@ public class DetailCafe {
                     String textAlert = "Omlouváme se, váše hodnocení se nepodařilo uložit.";
                     database.alert(titleAlert, textAlert);
                 }
+            } else {
+                //Vypise kde pridani hodnoceni selhalo
+                validationError(commentValid);
             }
 
         });
@@ -300,5 +304,17 @@ public class DetailCafe {
         detailStage.setScene(scene);
         detailStage.show();
         detailStage.setResizable(false);
+    }
+
+    //Vypis chyb registrace
+    private void validationError(boolean commentValid) {
+        String error = "Chyba: ";
+        if (!commentValid) {
+            addCommentLabel.setStyle("-fx-text-fill: red");
+            error += "\nKoemntář musí mít maximálně 150 znaků";
+        }
+
+        String title = "Chyba: ";
+        database.alert(title, error);
     }
 }
