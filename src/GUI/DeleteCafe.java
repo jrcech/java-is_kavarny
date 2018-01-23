@@ -9,19 +9,16 @@ import logic.Database;
 
 public class DeleteCafe {
     private Stage deleteStage;
-    private Button cancelButton;
-    private Button confirmButton;
 
     public DeleteCafe(Stage lastStage, Database database, int idCafe) {
 
         //Tlacitko - confirm
-        confirmButton = new Button();
+        Button confirmButton = new Button();
         confirmButton.setText("Potvrdit smazání");
         confirmButton.setOnAction(event -> {
-            String sql;
 
             //Smazani kavarny z databaze
-            sql = "DELETE FROM sql11216990.cafe WHERE cafe.id='" + idCafe + "'";
+            String sql = "DELETE FROM sql11216990.cafe WHERE cafe.id='" + idCafe + "'";
             boolean databaseOperation = database.getSearchDatabase().databaseOperation("DELETE", sql);
 
             //Vysledek pozadavku smazani
@@ -39,14 +36,14 @@ public class DeleteCafe {
         });
 
         //Tlacitko - cancel
-        cancelButton = new Button();
+        Button cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
             deleteStage.hide();
             lastStage.show();
         });
 
-        //GridPane - rozlozeni okna potvrzeni smazani
+        //GridPane - rozlozeni okna pro potvrzeni smazani
         GridPane gridPane = new GridPane();
         gridPane.add(confirmButton, 1, 1);
         gridPane.add(cancelButton, 2, 1);
