@@ -27,14 +27,9 @@ public class MenuPanel extends MenuBar {
 
         // MENU - Operace v Aplikaci
         Menu appMenu = new Menu("Program");
-        MenuItem main = new MenuItem("Hlavní strana");
         MenuItem logOut = new MenuItem("Odhlásit se");
         MenuItem end = new MenuItem("Ukončit program");
-        appMenu.getItems().addAll(main, logOut, end);
-        main.setOnAction((e) -> {
-            getChildren().clear();
-            borderPane.getChildren().addAll(this);
-        });
+        appMenu.getItems().addAll(logOut, end);
         logOut.setOnAction(event -> {
             appStage.hide();
             Login log = new Login(appStage);

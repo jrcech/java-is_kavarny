@@ -4,10 +4,10 @@
 .title {
     -fx-padding: 15px;
     -fx-color:black;
-    -fx-base: rgb(0,0,0);
     -fx-font-size: 25px;
     -fx-text-alignment: center;
 }
+
 .button {
     -fx-padding: 5px 15px;
     -fx-border-color: darkgrey;
@@ -22,4 +22,22 @@
 }
 .label{
     -fx-font-size: 16px;
+}
+.welcomeLabel {
+    -fx-padding: 15px 0px;
+    -fx-color:black;
+    -fx-font-size: 25px;
+    -fx-text-alignment: center;
+}
+.foundLabel {
+    -fx-padding: 15px 0px;
+    -fx-text-fill:black;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+}
+.notFoundLabel {
+    -fx-padding: 15px 0px;
+    -fx-text-fill:red;
+    -fx-font-size: 16px;
+    -fx-text-alignment: center;
 }
