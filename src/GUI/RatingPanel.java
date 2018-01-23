@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import interfaces.Observer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -8,16 +7,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.Database;
 import logic.Person;
 import logic.Rating;
 
 public class RatingPanel extends VBox implements Observer  {
 
-    private Idatabase database;
+    private Database database;
     private Stage lastStage;
     private int id;
 
-    public RatingPanel(Idatabase database, int id){
+    public RatingPanel(Database database, int id){
         this.database = database;
         this.id = id;
         database.getSearchDatabase().registerObserver(this);

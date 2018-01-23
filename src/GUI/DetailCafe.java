@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -8,12 +7,13 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Cafe;
+import logic.Database;
 import logic.Rating;
 
 public class DetailCafe {
 
     private Stage detailStage;
-    private Idatabase database;
+    private Database database;
     private RatingPanel ratingPanel;
     private Label nameLabel;
     private Label addressLabel;
@@ -40,7 +40,7 @@ public class DetailCafe {
     private Button deleteButton;
     private Button cancelButton;
 
-    public DetailCafe(Stage lastStage, Idatabase database, int idCafe){
+    public DetailCafe(Stage lastStage, Database database, int idCafe){
 
         this.database = database;
         //ID prihlasene osoby

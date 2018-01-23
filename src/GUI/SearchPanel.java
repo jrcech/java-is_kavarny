@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import interfaces.Observer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,10 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.Cafe;
+import logic.Database;
 
 public class SearchPanel extends VBox implements Observer {
 
-    private Idatabase database;
+    private Database database;
     private Stage lastStage;
     private Label nameLabel;
     private Label nameDataLabel;
@@ -25,7 +25,7 @@ public class SearchPanel extends VBox implements Observer {
     private Button detailButton;
 
 
-    public SearchPanel(Stage lastStage,Idatabase database){
+    public SearchPanel(Stage lastStage, Database database){
         this.lastStage = lastStage;
         this.database = database;
         database.getSearchDatabase().registerObserver(this);

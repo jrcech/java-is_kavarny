@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +17,7 @@ import logic.Database;
 public class EditCafe {
 
     private Stage editStage;
-    private Idatabase database;
+    private Database database;
     private Label nameLabel;
     private Label addressLabel;
     private Label regionLabel;
@@ -38,7 +37,7 @@ public class EditCafe {
     private Button submitButton;
     private Button cancelButton;
 
-    public EditCafe(Stage lastStage, Idatabase database, int idCafe){
+    public EditCafe(Stage lastStage, Database database, int idCafe){
         this.database = database;
         lastStage.hide();
 

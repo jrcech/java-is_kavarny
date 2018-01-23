@@ -1,6 +1,5 @@
 package logic;
 
-import interfaces.Idatabase;
 import javafx.scene.control.Alert;
 
 /**
@@ -10,7 +9,7 @@ import javafx.scene.control.Alert;
  * @version
  *
  */
-public class Database implements Idatabase {
+public class Database {
 
     private SearchDatabase searchDatabase = new SearchDatabase();
 
@@ -21,7 +20,6 @@ public class Database implements Idatabase {
      * @param
      * @return
      */
-    @Override
     public boolean validData(String option, String name) {
         switch (option) {
             case "name":
@@ -64,7 +62,6 @@ public class Database implements Idatabase {
         return false;
     }
 
-    @Override
     public boolean validPasswd(String passwd1, String passwd2) {
         if (passwd1.equals(passwd2)) {
             String valPa = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
@@ -83,7 +80,6 @@ public class Database implements Idatabase {
      * @param
      * @param
      */
-    @Override
     public void alert(String title, String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -96,7 +92,6 @@ public class Database implements Idatabase {
      *
      * @return vrací třídu SearchDatabase
      */
-    @Override
     public SearchDatabase getSearchDatabase() {
         return searchDatabase;
     }

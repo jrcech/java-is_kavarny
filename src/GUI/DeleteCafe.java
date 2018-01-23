@@ -1,18 +1,18 @@
 package GUI;
 
-import interfaces.Idatabase;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import logic.Database;
 
 public class DeleteCafe {
     private Stage deleteStage;
     private Button cancelButton;
     private Button confirmButton;
 
-    public DeleteCafe(Stage lastStage, Idatabase database, int idCafe) {
+    public DeleteCafe(Stage lastStage, Database database, int idCafe) {
 
         //Tlacitko - confirm
         confirmButton = new Button();

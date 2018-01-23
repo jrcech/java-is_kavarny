@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +13,7 @@ import logic.Database;
 
 public class Registration {
 
-    private Idatabase database;
+    private Database database;
     private Stage registrationStage;
     private Text titlePersonal;
     private Text titleRegistration;

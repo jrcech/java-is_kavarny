@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +16,7 @@ import logic.Database;
 public class Login {
 
     private Stage loginStage;
-    private Idatabase database;
+    private Database database;
     private Label userLabel;
     private TextField userField;
     private Label passLabel;

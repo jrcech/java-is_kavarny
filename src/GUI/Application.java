@@ -1,6 +1,5 @@
 package GUI;
 
-import interfaces.Idatabase;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.Database;
 
 public class Application {
 
@@ -21,7 +21,7 @@ public class Application {
     private Button searchButton;
     private Button newCafeButton;
 
-    public Application(Stage lastStage, Idatabase database){
+    public Application(Stage lastStage, Database database){
 
         lastStage.hide();
 
