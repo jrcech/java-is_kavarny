@@ -1,0 +1,10 @@
+#border_pane{
+    -fx-background: #ffffff;
+}
+.title {
+    -fx-padding: 10px;
+    -fx-color:black;
+    -fx-base: rgb(0,0,0);
+    -fx-font-size: 25px;
+    -fx-text-alignment: center;
+}
