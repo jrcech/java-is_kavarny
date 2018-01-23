@@ -34,6 +34,10 @@ public class RatingPanel extends VBox implements Observer  {
                 Label userLabel = new Label();
                 userLabel.setText("Uživatel:");
                 Label userDataLabel = new Label();
+
+                String sql = "SELECT * FROM sql11216990.person";
+                database.getSearchDatabase().databaseOperation("LOGIN", sql);
+
                 for (Person person : database.getSearchDatabase().getPerson()) {
                     if (person.getId() == rating.getIdPerson()) {
                         userDataLabel.setText(person.getUsername());

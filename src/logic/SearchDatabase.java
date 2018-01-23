@@ -25,6 +25,15 @@ public class SearchDatabase implements Subject {
     private final String DB_CONNECTION = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11216990?useUnicode=true&characterEncoding=UTF-8";
     private final String DB_USER = "sql11216990";
     private final String DB_PASSWORD = "76HIY8tGu2";
+    private boolean first;
+
+    /**
+     *
+     *
+     */
+    public SearchDatabase() {
+        first = true;
+    }
 
     /**
      *
@@ -114,7 +123,7 @@ public class SearchDatabase implements Subject {
     }
 
     /**
-     *
+     * 
      *
      * @param
      */
@@ -127,8 +136,12 @@ public class SearchDatabase implements Subject {
                 String lastName = rs.getString("lastName");
                 String email = rs.getString("email");
                 Boolean isAdmin = rs.getBoolean("isAdmin");
-                person = new Person(id, username, firstName, lastName, email, isAdmin);
-                dataPerson.add(new Person(id, username, lastName, firstName, email, isAdmin));
+                if (first) {
+                    person = new Person(id, username, firstName, lastName, email, isAdmin);
+                    first = false;
+                } else {
+                    dataPerson.add(new Person(id, username, lastName, firstName, email, isAdmin));
+                }
             }
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -136,7 +149,7 @@ public class SearchDatabase implements Subject {
     }
 
     /**
-     *
+     * 
      * @return
      */
     public Person getLoggedPerson() {
