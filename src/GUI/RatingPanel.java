@@ -2,6 +2,7 @@ package GUI;
 
 import interfaces.Observer;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -16,6 +17,8 @@ public class RatingPanel extends VBox implements Observer  {
     private Database database;
     private Stage lastStage;
     private int id;
+    private Button deleteButton;
+    private int idRating;
 
     public RatingPanel(Database database, int id){
         this.database = database;
@@ -61,6 +64,12 @@ public class RatingPanel extends VBox implements Observer  {
                 commentTextArea.setWrapText(true);
                 commentTextArea.setEditable(false);
 
+                //Tlacitko - delete
+                idRating = rating.getId();
+                deleteButton = new Button();
+                deleteButton.setText("Smazat");
+                deleteButton.setOnAction(event -> new DeleteRating(lastStage, database, idRating));
+
                 //CAFE Container
                 GridPane ratingPane = new GridPane();
                 ratingPane.setAlignment(Pos.TOP_LEFT);
@@ -73,12 +82,18 @@ public class RatingPanel extends VBox implements Observer  {
                     ratingPane.add(ratingDataLabel,1,1);
                     ratingPane.add(commentLabel,0,2);
                     ratingPane.add(commentTextArea,1,2);
+                    if (database.getSearchDatabase().getLoggedPerson().isAdmin() || database.getSearchDatabase().getLoggedPerson().getId() == rating.getIdPerson()) {
+                        ratingPane.add(deleteButton,1,3);
+                    }
                 }
                 else{
                     ratingPane.add(userLabel,0,0);
                     ratingPane.add(userDataLabel,1,0);
                     ratingPane.add(ratingLabel,0,1);
                     ratingPane.add(ratingDataLabel,1,1);
+                    if (database.getSearchDatabase().getLoggedPerson().isAdmin() || database.getSearchDatabase().getLoggedPerson().getId() == rating.getIdPerson()) {
+                        ratingPane.add(deleteButton,1,3);
+                    }
                 }
                 this.getChildren().addAll(ratingPane);
 
