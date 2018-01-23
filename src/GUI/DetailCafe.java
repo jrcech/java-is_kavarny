@@ -218,8 +218,12 @@ public class DetailCafe {
 
         // TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(5);
-        boxButtons.getChildren().addAll(editButton, cancelButton, deleteButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
+        if (!database.getSearchDatabase().getLoggedPerson().isAdmin()) {
+            boxButtons.getChildren().addAll(cancelButton);
+        } else {
+            boxButtons.getChildren().addAll(editButton, cancelButton, deleteButton);
+        }
 
         //GridPane - Pridani hodnoceni
         GridPane addRatingPane = new GridPane();

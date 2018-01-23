@@ -60,8 +60,12 @@ public class Application {
 
         //CONTROLS PANEL
         HBox controlsPanel = new HBox(5);
-        controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
         controlsPanel.setAlignment(Pos.TOP_CENTER);
+        if (!database.getSearchDatabase().getLoggedPerson().isAdmin()) {
+            controlsPanel.getChildren().addAll(searchField, searchButton);
+        } else {
+            controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
+        }
 
 
         VBox vBox = new VBox();
