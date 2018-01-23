@@ -1,17 +1,14 @@
 package logic;
 
-
 import interfaces.Observer;
 import interfaces.Subject;
-
 import java.sql.*;
 import java.util.*;
 
-/**
+/** Class SearchDatabase
  *
- *
- * @author
- * @version
+ * @author cecj02
+ * @version ZS 2017
  *
  */
 public class SearchDatabase implements Subject {
@@ -27,20 +24,18 @@ public class SearchDatabase implements Subject {
     private final String DB_PASSWORD = "76HIY8tGu2";
     private boolean first;
 
-    /**
-     *
+    /** Constructor
      *
      */
     public SearchDatabase() {
         first = true;
     }
 
-    /**
+    /** Operace s databazi
      *
-     *
-     * @param
-     * @param
-     * @return
+     * @param option Typ operace
+     * @param sql SQL dotaz
+     * @return true – uspesna operace s db
      */
     public boolean databaseOperation(String option, String sql) {
         boolean value = false;
@@ -49,25 +44,25 @@ public class SearchDatabase implements Subject {
         try {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-            ResultSet rs;
+            ResultSet resultSet;
             if (option.equals("SEARCH")) {
                 dataCafe.clear();
                 dataRating.clear();
                 statement = connection.prepareStatement(sql);
-                rs = statement.executeQuery();
-                if (rs.isBeforeFirst()) {
+                resultSet = statement.executeQuery();
+                if (resultSet.isBeforeFirst()) {
                     value = true;
                 }
-                while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String name = rs.getString("name");
-                    String description = rs.getString("description");
-                    String shortDescription = rs.getString("shortDescription");
-                    String address = rs.getString("address");
-                    String region = rs.getString("region");
-                    String coffeeBrand = rs.getString("coffeeBrand");
-                    String event = rs.getString("event");
-                    String specialOffer = rs.getString("specialOffer");
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    String shortDescription = resultSet.getString("shortDescription");
+                    String address = resultSet.getString("address");
+                    String region = resultSet.getString("region");
+                    String coffeeBrand = resultSet.getString("coffeeBrand");
+                    String event = resultSet.getString("event");
+                    String specialOffer = resultSet.getString("specialOffer");
                     sql = "SELECT * FROM sql11216990.rating WHERE idCafe='" + id + "'";
                     statement = connection.prepareStatement(sql);
                     ResultSet rsRating = statement.executeQuery();
@@ -91,16 +86,16 @@ public class SearchDatabase implements Subject {
             }
             if (option.equals("LOGIN")) {
                 statement = connection.prepareStatement(sql);
-                rs = statement.executeQuery();
-                if (rs.isBeforeFirst()) {
-                    personSetData(rs);
+                resultSet = statement.executeQuery();
+                if (resultSet.isBeforeFirst()) {
+                    personSetData(resultSet);
                     value = true;
                 }
             }
             if (option.equals("SELECT")) {
                 statement = connection.prepareStatement(sql);
-                rs = statement.executeQuery();
-                if (rs.isBeforeFirst()) {
+                resultSet = statement.executeQuery();
+                if (resultSet.isBeforeFirst()) {
                     value = true;
                 }
             }
@@ -122,20 +117,21 @@ public class SearchDatabase implements Subject {
         return value;
     }
 
-    /**
+    /** Nastaveni tridy Person na zaklade vysledku sql dotazu
      * 
-     *
-     * @param
+     * @param resultSet Vysledek sql dotazu
      */
-    private void personSetData(ResultSet rs) {
+    private void personSetData(ResultSet resultSet) {
         try {
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String username = rs.getString("username");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                String email = rs.getString("email");
-                Boolean isAdmin = rs.getBoolean("isAdmin");
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String username = resultSet.getString("username");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                String email = resultSet.getString("email");
+                Boolean isAdmin = resultSet.getBoolean("isAdmin");
+
+                //Kontrola prihlaseneho uzivatele
                 if (first) {
                     person = new Person(id, username, firstName, lastName, email, isAdmin);
                     first = false;
@@ -143,73 +139,75 @@ public class SearchDatabase implements Subject {
                     dataPerson.add(new Person(id, username, lastName, firstName, email, isAdmin));
                 }
             }
-        } catch (SQLException ex) {
-            System.out.println(ex);
+        } catch (SQLException exception) {
+            System.out.println(exception);
         }
     }
 
-    /**
+    /** Ziskani prihlasene osoby
      * 
-     * @return
+     * @return person Osoba
      */
     public Person getLoggedPerson() {
         return person;
     }
 
-    /**
+    /** Nastaveni noveho hodnoceni
      *
-     * @param
-     * @param
-     * @param
-     * @param
+     * @param idRating ID hodnoceni
+     * @param idCafe ID kavarny
+     * @param idPerson ID osoby
+     * @param commentRating Hodnota hodnoceni u kumentare
+     * @param comment Komentar
      */
     public void setNewRating(int idRating, int idCafe, int idPerson, double commentRating, String comment) {
         dataRating.add(new Rating(idRating, idCafe, idPerson, commentRating, comment));
     }
 
-    /**
+    /** Ziskani dat kavaren
      *
-     * @return
+     * @return dataCafe Kolekce dat kavaren
      */
     public Collection<Cafe> getCafe() {
         return Collections.unmodifiableCollection(dataCafe);
     }
 
-    /**
+    /** Ziskani dat hodnoceni
      *
-     * @return
+     * @return dataRating Kolekce dat hodnoceni
      */
     public Collection<Rating> getRating() {
         return Collections.unmodifiableCollection(dataRating);
     }
 
-    /**
+    /** Ziskani seznamu osob
      *
-     * @return
+     * @return dataPerson Kolekce osob
      */
     public Collection<Person> getPerson() {
         return Collections.unmodifiableCollection(dataPerson);
     }
 
-    /**
+    /** Pridani observeru
      *
-     * @param
+     * @param observer Observer
      */
     @Override
     public void registerObserver(Observer observer) {
         listObserveru.add(observer);
     }
 
-    /**
+    /** Odebrani observeru
      *
-     * @param
+     * @param observer Observer
      */
     @Override
     public void cancelObserver(Observer observer) {
         listObserveru.remove(observer);
     }
 
-    /**
+    /** Aktualizace observeru
+     *
      */
     @Override
     public void notifyAllObservers() {
