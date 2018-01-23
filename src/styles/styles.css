@@ -66,7 +66,7 @@
 .searchField{
     -fx-padding: 9px 0px 10px 0px;
 }
-.newCafeButton{
+.blueButton{
     -fx-text-fill: white;
     -fx-background-color: #22a2d0;
 }
@@ -75,4 +75,10 @@
     -fx-text-fill: white;
     -fx-background-color: #22a2d0;
     -fx-font-size: 14px;
+}
+.registrationBox{
+    -fx-padding: 20px 0 0 0;
+}
+.registrationBoxButtons {
+    -fx-padding: 10px 0 0 0;
 }

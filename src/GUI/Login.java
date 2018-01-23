@@ -77,6 +77,7 @@ public class Login {
 
         // TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(10);
+        boxButtons.getStyleClass().add("registrationBoxButtons");
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 

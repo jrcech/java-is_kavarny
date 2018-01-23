@@ -43,10 +43,12 @@ public class Registration {
         //Titulek - Osobní udaje
         titlePersonal = new Text();
         titlePersonal.setText("Osobní údaje:");
+        titlePersonal.getStyleClass().add("title");
 
         //Titulek - Přihlašovací údaje
         titleRegistration = new Text();
         titleRegistration.setText("Přihlašovací Údaje:");
+        titleRegistration.getStyleClass().add("title");
 
         //Form - Jmeno
         firstNameLabel = new Label();
@@ -86,6 +88,7 @@ public class Registration {
 
         //Tlacitko - submit
         submitButton = new Button();
+        submitButton.getStyleClass().add("blueButton");
         submitButton.setText("Registrovat");
         submitButton.setOnAction(event -> {
             String firstName = firstNameField.getText();
@@ -136,6 +139,7 @@ public class Registration {
 
         //TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(5);
+        boxButtons.getStyleClass().add("registrationBoxButtons");
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
@@ -144,6 +148,8 @@ public class Registration {
         firstGridPane.setAlignment(Pos.CENTER);
         firstGridPane.setHgap(10);
         firstGridPane.setVgap(10);
+        firstGridPane.getColumnConstraints().add(new ColumnConstraints(100)); // column 0 is 100 wide
+        firstGridPane.getColumnConstraints().add(new ColumnConstraints(200));
         firstGridPane.add(titlePersonal,0,0, 2,1);
         firstGridPane.add(firstNameLabel,0,1);
         firstGridPane.add(firstNameField,1,1);
@@ -155,6 +161,8 @@ public class Registration {
         secondGridPane.setAlignment(Pos.CENTER);
         secondGridPane.setHgap(10);
         secondGridPane.setVgap(10);
+        secondGridPane.getColumnConstraints().add(new ColumnConstraints(100)); // column 0 is 100 wide
+        secondGridPane.getColumnConstraints().add(new ColumnConstraints(200));
         secondGridPane.add(titleRegistration,0,0, 2,1);
         secondGridPane.add(usernameLabel,0,1);
         secondGridPane.add(usernameField,1,1);
@@ -167,14 +175,16 @@ public class Registration {
         secondGridPane.add(boxButtons,1,5);
 
         VBox vBox = new VBox();
+        vBox.getStyleClass().add("registrationBox");
         vBox.getChildren().addAll(firstGridPane,secondGridPane);
-        vBox.setSpacing(15);
-        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(20);
+
 
         //Window - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(vBox);
-        Scene scene = new Scene(borderPane, 450, 300);
+        Scene scene = new Scene(borderPane, 450, 400);
+        scene.getStylesheets().add("styles/styles.css");
 
         registrationStage = new Stage();
         registrationStage.setTitle("Aplikace káva - Registrace");
