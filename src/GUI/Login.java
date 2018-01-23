@@ -34,6 +34,7 @@ public class Login {
         //Titulek
         Text title = new Text();
         title.setText("Zadejte přihlašovací údaje");
+        title.getStyleClass().add("title");
 
         //Form - username
         userLabel = new Label();
@@ -49,6 +50,7 @@ public class Login {
 
         //Button - submit
         submitButton = new Button();
+        submitButton.getStyleClass().add("submitButton");
         submitButton.setText("Přihlásit");
         submitButton.setOnAction(event -> {
             String name = userField.getText();
@@ -74,7 +76,7 @@ public class Login {
         });
 
         // TilePane - spojeni tlacitek
-        HBox boxButtons = new HBox(5);
+        HBox boxButtons = new HBox(10);
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
 
@@ -94,6 +96,7 @@ public class Login {
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
         Scene scene = new Scene(borderPane, 450, 300);
+        scene.getStylesheets().add("styles/styles.css");
 
         loginStage = new Stage();
         loginStage.setTitle("Aplikace káva - Přihlášení");

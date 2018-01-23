@@ -1,0 +1,66 @@
+#border_pane{
+    -fx-background: #ffffff;
+}
+.title {
+    -fx-padding: 15px;
+    -fx-color:black;
+    -fx-font-size: 25px;
+    -fx-text-alignment: center;
+}
+
+.button {
+    -fx-padding: 5px 15px;
+    -fx-border-color: #747474;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-font-size: 16px;
+    -fx-text-alignment: center;
+}
+.submitButton{
+    -fx-background-color: #61a910;
+    -fx-border-color: #747474;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-text-fill: white;
+}
+.label{
+    -fx-font-size: 16px;
+}
+.welcomeLabel {
+    -fx-padding: 15px 0px 20px 0px;
+    -fx-color:black;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+    -fx-font-weight: 800;
+}
+.foundLabel {
+    -fx-padding: 15px 0px 20px 0px;
+    -fx-text-fill:black;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+    -fx-font-weight: 800;
+}
+.notFoundLabel {
+    -fx-padding: 15px 0px 20px 0px;
+    -fx-text-fill:red;
+    -fx-font-size: 16px;
+    -fx-text-alignment: center;
+    -fx-font-weight: 800;
+}
+.searchControlsPanel{
+    -fx-padding: 15px 0px;
+
+}
+.infoPane{
+    -fx-background-color: white;
+}
+.searchResults{
+    -fx-background-color: white;
+}
+.searchField{
+    -fx-padding: 9px 0px 10px 0px;
+}
+.newCafeButton{
+    -fx-text-fill: white;
+    -fx-background-color: #22a2d0;
+}

@@ -17,6 +17,7 @@ public class Application {
     private SearchPanel searchPanel;
     private Label welcomeLabel;
     private Label notFoundLabel;
+    private Label foundLabel;
     private TextField searchField;
     private Button searchButton;
     private Button newCafeButton;
@@ -30,36 +31,49 @@ public class Application {
         appStage = new Stage();
         menuPanel = new MenuPanel(this, appStage, borderPane);
         appStage.setTitle("Aplikace káva - Hlavní obrazovka");
-        Scene scene = new Scene(borderPane, 600, 300);
+        Scene scene = new Scene(borderPane, 600, 720);
+        scene.getStylesheets().add("styles/styles.css");
         appStage.setScene(scene);
 
 
         welcomeLabel = new Label();
         welcomeLabel.setText("Vítejte uživateli " + database.getOperateDatabase().getLoggedPerson().getUsername());
+        welcomeLabel.getStyleClass().add("welcomeLabel");
         notFoundLabel = new Label();
         notFoundLabel.setText("Nic podobného jsme nenalezli, zkuste zadat něco jiného");
+        notFoundLabel.getStyleClass().add("notFoundLabel");
+        foundLabel = new Label();
+        foundLabel.setText("Seznam nalezených kaváren");
+        foundLabel.getStyleClass().add("foundLabel");
+
         FlowPane infoPane = new FlowPane();
+        infoPane.getStyleClass().add("infoPane");
         infoPane.getChildren().addAll(welcomeLabel);
         infoPane.setAlignment(Pos.CENTER);
 
         //PANEL - vysledky hledani
         ScrollPane searchResults = new ScrollPane();
+        searchResults.getStyleClass().add("searchResults");
         searchResults.setFitToWidth(true);
+
         //PANEL - hledani field + button
         searchField = new TextField();
+        searchField.getStyleClass().add("searchField");
         searchButton = new Button();
         searchButton.setText("Vyhledat");
 
 
         //PANEL - button nova kavarna
         newCafeButton = new Button();
+        newCafeButton.getStyleClass().add("newCafeButton");
         newCafeButton.setText("Přidat kavárnu");
         newCafeButton.setOnAction(event -> {
             EditCafe editCafe = new EditCafe(appStage, database, 99999999);
         });
 
         //CONTROLS PANEL
-        HBox controlsPanel = new HBox(5);
+        HBox controlsPanel = new HBox(10);
+        controlsPanel.getStyleClass().add("searchControlsPanel");
         controlsPanel.setAlignment(Pos.TOP_CENTER);
         if (!database.getOperateDatabase().getLoggedPerson().isAdmin()) {
             controlsPanel.getChildren().addAll(searchField, searchButton);
@@ -80,6 +94,8 @@ public class Application {
             if(databaseOperation){
                 vBox.getChildren().clear();
                 searchResults.setContent(searchPanel);
+                infoPane.getChildren().clear();
+                infoPane.getChildren().addAll(foundLabel);
                 vBox.getChildren().addAll(controlsPanel, infoPane, searchResults);
             }
             else {

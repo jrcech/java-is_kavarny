@@ -23,10 +23,13 @@ public class Main extends Application {
 
         //Titulek
         Text title = new Text();
-        title.setText("Vítejte v IS");
+        title.setText("Vítejte v Informačním systému\npro kávové závisláky");
+        title.getStyleClass().add("title");
 
         //Tlacitko - prihlaseni
         Button login = new Button();
+        login.getStyleClass().add("submitButton");
+
         login.setText("Přihlášení");
         login.setOnAction(event -> {
             Login log = new Login(primaryStage);
@@ -42,12 +45,14 @@ public class Main extends Application {
         //VBox
         VBox vBox = new VBox();
         vBox.getChildren().addAll(title, login, registration);
-        vBox.setSpacing(15);
+        vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
 
         //Window - setup
         borderPane.setCenter(vBox);
         Scene scene = new Scene(borderPane, 450, 300);
+        scene.getStylesheets().add("styles/styles.css");
+
         primaryStage.setTitle("Aplikace káva");
         primaryStage.setScene(scene);
         primaryStage.show();
