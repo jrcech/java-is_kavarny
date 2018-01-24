@@ -39,7 +39,6 @@ public class DeleteRating {
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
             deleteStage.hide();
-            lastStage.show();
         });
 
         //GridPane - rozlozeni okna pro potvrzeni smazani

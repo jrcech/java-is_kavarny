@@ -25,14 +25,14 @@ public class DetailCafe {
     private Label eventLabel;
     private Label addRatingLabel;
     private Label addCommentLabel;
-    private TextField nameField;
-    private TextField addressField;
-    private TextField regionField;
-    private TextField shortDescField;
-    private TextArea descArea;
-    private TextField offerField;
-    private TextField coffeeBrandField;
-    private TextField eventField;
+    private Label name;
+    private Label address;
+    private Label region;
+    private Label shortDesc;
+    private Label desc;
+    private Label offer;
+    private Label coffeeBrand;
+    private Label event;
     private TextArea addCommentArea;
 
     private Button addRatingButton;
@@ -58,54 +58,45 @@ public class DetailCafe {
         //Form - Nazev
         nameLabel = new Label();
         nameLabel.setText("Název:");
-        nameField = new TextField();
-        nameField.setEditable(false);
+        name = new Label();
 
         //Form - Adresa
         addressLabel = new Label();
         addressLabel.setText("Adresa:");
-        addressField = new TextField();
-        addressField.setEditable(false);
+        address = new Label();
 
         //Form - Kraje
         regionLabel = new Label();
         regionLabel.setText("Kraj:");
-        regionField = new TextField();
-        regionField.setEditable(false);
+        region = new Label();
 
         //Form - Popis
         shortDescLabel = new Label();
         shortDescLabel.setText("Krátký popis:");
-        shortDescField = new TextField();
-        shortDescField.setEditable(false);
+        shortDesc = new Label();
 
         //Form - Popis
         descLabel = new Label();
         descLabel.setText("Popis:");
         descLabel.setWrapText(true);
-        descArea = new TextArea();
-        descArea.setEditable(false);
-        descArea.setPrefRowCount(4);
-        descArea.setWrapText(true);
+        desc = new Label();
+        desc.setWrapText(true);
 
         //Form - Nabidka
         offerLabel = new Label();
         offerLabel.setText("Nabídka:");
-        offerField = new TextField();
-        offerField.setEditable(false);
+        offer = new Label();
 
         //Form - Znacka kavy
         coffeeBrandLabel = new Label();
         coffeeBrandLabel.setText("Značka kávy: ");
-        coffeeBrandField = new TextField();
-        coffeeBrandField.setEditable(false);
+        coffeeBrand = new Label();
 
         //Form - Udalost
         eventLabel = new Label();
         eventLabel.setText("Událost:");
         eventLabel.setWrapText(true);
-        eventField = new TextField();
-        eventField.setEditable(false);
+        event = new Label();
 
         //Tlacitko - edit cafe
         editButton = new Button();
@@ -191,14 +182,14 @@ public class DetailCafe {
         //LOOP - Priradi hodnoty do formulare
         for (Cafe cafe : database.getCafe()) {
             if (idCafe == cafe.getId()) {
-                nameField.setText(cafe.getName());
-                addressField.setText(cafe.getAddress());
-                regionField.setText(cafe.getRegion());
-                shortDescField.setText(cafe.getShortDescription());
-                descArea.setText(cafe.getDescription());
-                coffeeBrandField.setText(cafe.getCoffeeBrand());
-                eventField.setText(cafe.getEvent());
-                offerField.setText(cafe.getSpecialOffer());
+                name.setText(cafe.getName());
+                address.setText(cafe.getAddress());
+                region.setText(cafe.getRegion());
+                shortDesc.setText(cafe.getShortDescription());
+                desc.setText(cafe.getDescription());
+                coffeeBrand.setText(cafe.getCoffeeBrand());
+                event.setText(cafe.getEvent());
+                offer.setText(cafe.getSpecialOffer());
                 for (Rating rating : database.getRating()) {
                     if (idCafe == rating.getIdCafe() && idPerson == rating.getIdPerson()) {
                         addCommentArea.setText(rating.getComment());
@@ -270,21 +261,21 @@ public class DetailCafe {
         detailPane.setVgap(15);
         detailPane.add(title,0,0, 2,1);
         detailPane.add(nameLabel,0,1);
-        detailPane.add(nameField,1,1);
+        detailPane.add(name,1,1);
         detailPane.add(addressLabel,0,2);
-        detailPane.add(addressField,1,2);
+        detailPane.add(address,1,2);
         detailPane.add(regionLabel,0,3);
-        detailPane.add(regionField,1,3);
+        detailPane.add(region,1,3);
         detailPane.add(shortDescLabel,0,4);
-        detailPane.add(shortDescField,1,4);
+        detailPane.add(shortDesc,1,4);
         detailPane.add(descLabel,0,5);
-        detailPane.add(descArea,1,5);
+        detailPane.add(desc,1,5);
         detailPane.add(coffeeBrandLabel,0,6);
-        detailPane.add(coffeeBrandField,1,6);
+        detailPane.add(coffeeBrand,1,6);
         detailPane.add(eventLabel,0,7);
-        detailPane.add(eventField,1,7);
+        detailPane.add(event,1,7);
         detailPane.add(offerLabel,0,8);
-        detailPane.add(offerField,1,8);
+        detailPane.add(offer,1,8);
         detailPane.add(boxButtons,1,9);
 
 
