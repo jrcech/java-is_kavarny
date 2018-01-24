@@ -4,7 +4,6 @@ import interfaces.Observer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -13,6 +12,10 @@ import logic.Database;
 import logic.Person;
 import logic.Rating;
 
+/** Panel zobrazujici hodnoceni kavarny
+ * @author slav02 / cejc2
+ * @version ZS 2018
+ */
 public class RatingPanel extends VBox implements Observer  {
 
     private Database database;
@@ -28,6 +31,7 @@ public class RatingPanel extends VBox implements Observer  {
         update();
     }
 
+    /** Generuje seznam hodnoceni kavarny**/
     @Override
     public void update(){
         this.getChildren().clear();

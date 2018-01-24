@@ -10,6 +10,10 @@ import logic.Cafe;
 import logic.Database;
 import logic.Rating;
 
+/** DetailCafe - Obrazovka detailu kavarny + nove hodnoceni
+ * @author slav02 / cecj2
+ * @version ZS 2018
+ */
 public class DetailCafe {
 
     private Stage detailStage;
@@ -40,6 +44,11 @@ public class DetailCafe {
     private Button deleteButton;
     private Button cancelButton;
 
+    /** Contructor
+     * @param lastStage instance predesleho okna
+     * @param database instance databaze
+     * @param idCafe id kavarny, jejiz detail se zobrazuje
+     */
     public DetailCafe(Stage lastStage, Database database, int idCafe){
 
         this.database = database;
@@ -50,36 +59,37 @@ public class DetailCafe {
         //aktualizace dat
         String sql1 = "SELECT * FROM sql11216990.cafe";
         database.operate("SEARCH", sql1);
-        //Titulek
+
+        //TITLE
         Text title = new Text();
         title.setText("Detailní údaje kavárny");
         title.getStyleClass().add("title");
 
-        //Form - Nazev
+        //FORM - Nazev
         nameLabel = new Label();
         nameLabel.getStyleClass().add("boldLabel");
         nameLabel.setText("Název:");
         name = new Label();
 
-        //Form - Adresa
+        //FORM - Adresa
         addressLabel = new Label();
         addressLabel.getStyleClass().add("boldLabel");
         addressLabel.setText("Adresa:");
         address = new Label();
 
-        //Form - Kraje
+        //FORM - Kraje
         regionLabel = new Label();
         regionLabel.getStyleClass().add("boldLabel");
         regionLabel.setText("Kraj:");
         region = new Label();
 
-        //Form - Popis
+        //FORM - Popis
         shortDescLabel = new Label();
         shortDescLabel.getStyleClass().add("boldLabel");
         shortDescLabel.setText("Krátký popis:");
         shortDesc = new Label();
 
-        //Form - Popis
+        //FORM - Popis
         descLabel = new Label();
         descLabel.getStyleClass().add("boldLabel");
         descLabel.setText("Popis:");
@@ -87,33 +97,33 @@ public class DetailCafe {
         desc = new Label();
         desc.setWrapText(true);
 
-        //Form - Nabidka
+        //FORM - Nabidka
         offerLabel = new Label();
         offerLabel.getStyleClass().add("boldLabel");
         offerLabel.setText("Nabídka:");
         offer = new Label();
 
-        //Form - Znacka kavy
+        //FORM - Znacka kavy
         coffeeBrandLabel = new Label();
         coffeeBrandLabel.getStyleClass().add("boldLabel");
         coffeeBrandLabel.setText("Značka kávy: ");
         coffeeBrand = new Label();
 
-        //Form - Udalost
+        //FORM - Udalost
         eventLabel = new Label();
         eventLabel.getStyleClass().add("boldLabel");
         eventLabel.setText("Událost:");
         eventLabel.setWrapText(true);
         event = new Label();
 
-        //Tlacitko - edit cafe
+        //BUTTON - edit cafe
         editButton = new Button();
         editButton.setText("Upravit");
         editButton.setOnAction(event -> {
             EditCafe editCafe = new EditCafe(detailStage, database, idCafe);
         });
 
-        //Tlacitko - cancel
+        //BUTTON - cancel
         cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
@@ -121,31 +131,31 @@ public class DetailCafe {
             lastStage.show();
         });
 
-        //Pridat Rating - Titulek
+        //TITLE - Pridat Rating
         Text addRatingTitle = new Text();
         addRatingTitle.setText("Přidejte vlastní hodnocení");
         addRatingTitle.getStyleClass().add("title-small");
 
-        //Rating Ostatnich - Titulek
+        //TITLE - Rating Ostatnich
         Text otherRatingTitle = new Text();
         otherRatingTitle.setText("Hodnocení ostatních");
         otherRatingTitle.getStyleClass().add("title-small");
 
-        //Form - Rating
+        //FORM - Rating
         addRatingLabel = new Label();
         addRatingLabel.setText("Hodnocení:");
         ComboBox addRatingValue = new ComboBox();
         addRatingValue.getItems().addAll(5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0);
         addRatingValue.getSelectionModel().selectFirst();
 
-        //Form - Comment
+        //FORM - Comment
         addCommentLabel = new Label();
         addCommentLabel.setText("Komentář:");
         addCommentArea = new TextArea();
         addCommentArea.setWrapText(true);
         addCommentArea.setPrefRowCount(4);
 
-        //Tlacitko - submit rating
+        //BUTTON - potvrzeni hodnoceni
         addRatingButton = new Button();
         addRatingButton.getStyleClass().add("submitButton");
         addRatingButton.setText("Odeslat hodnocení");
@@ -210,7 +220,7 @@ public class DetailCafe {
             }
         }
 
-        //Tlacitko - submit
+        //BUTTON - upravit udaje kavarny
         editButton = new Button();
         editButton.getStyleClass().add("blueButton");
         editButton.setText("Upravit");
@@ -218,7 +228,7 @@ public class DetailCafe {
             EditCafe editCafe = new EditCafe(detailStage, database, idCafe);
         });
 
-        //Tlacitko - cancel
+        //BUTTON - zpet na minulou obrazovku
         cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
@@ -226,13 +236,13 @@ public class DetailCafe {
             lastStage.show();
         });
 
-        //Tlacitko - delete
+        //BUTTON - smaze kavarnu
         deleteButton = new Button();
         deleteButton.getStyleClass().add("deleteButton");
         deleteButton.setText("Smazat");
         deleteButton.setOnAction(event -> new DeleteCafe(detailStage, database, idCafe));
 
-        // TilePane - spojeni tlacitek
+        //TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(15);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
         if (database.getLoggedPerson().isAdmin()) {
@@ -290,7 +300,6 @@ public class DetailCafe {
         detailPane.add(cancelButton,0,9);
         detailPane.add(boxButtons,1,9);
 
-
         GridPane gridPane = new GridPane();
         gridPane.getColumnConstraints().add(new ColumnConstraints(450));
         gridPane.getColumnConstraints().add(new ColumnConstraints(330));
@@ -298,11 +307,9 @@ public class DetailCafe {
         gridPane.add(detailPane,0,0);
         gridPane.add(addRatingWrapper,1,0);
 
-
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("panePadding");
         borderPane.setCenter(gridPane);
-
 
         detailStage = new Stage();
         Scene scene = new Scene(borderPane, 830, 465);

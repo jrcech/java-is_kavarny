@@ -8,17 +8,26 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Database;
 
+/** Potvrzovaci obrazovka pri smazani hodnoceni
+ * @author cejc2
+ * @version ZS 2018
+ */
 public class DeleteRating {
     private Stage deleteStage;
 
+    /**Constructor
+     * @param lastStage Stage minuleho okna
+     * @param database
+     * @param idRating id ratingu, ktery chceme smazat
+     */
     public DeleteRating(Stage lastStage, Database database, int idRating) {
 
-        //Titulek
+        //TITLE
         Text title = new Text();
         title.setText("Opravdu chcete smazat hodnocení");
         title.getStyleClass().add("title-small");
 
-        //Tlacitko - confirm
+        //BUTTON - potvrzeni smazani
         Button confirmButton = new Button();
         confirmButton.getStyleClass().add("deleteButton");
         confirmButton.setText("Potvrdit smazání");
@@ -45,7 +54,7 @@ public class DeleteRating {
             }
         });
 
-        //Tlacitko - cancel
+        //BUTTON - zpet na minulou obrazovku
         Button cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
@@ -66,7 +75,6 @@ public class DeleteRating {
         borderPane.setCenter(gridPane);
         Scene scene = new Scene(borderPane, 350, 150);
         scene.getStylesheets().add("styles/styles.css");
-
 
         deleteStage = new Stage();
         deleteStage.setTitle("Aplikace káva - Smazání hodnocení");

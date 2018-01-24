@@ -11,6 +11,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Database;
 
+/** Obrazovka registrace
+ * @author slav02 / cejc2
+ * @version ZS 2018
+ */
 public class Registration {
 
     private Database database;
@@ -33,60 +37,59 @@ public class Registration {
     private Button cancelButton;
 
     /**Constructor
-     *
      * @param lastStage Stage minuleho okna
      */
     public Registration(Stage lastStage){
         database = new Database();
         lastStage.hide();
 
-        //Titulek - Osobní udaje
+        //TITLE - Osobní udaje
         titlePersonal = new Text();
         titlePersonal.setText("Osobní údaje:");
         titlePersonal.getStyleClass().add("title");
 
-        //Titulek - Přihlašovací údaje
+        //TITLE - Přihlašovací údaje
         titleRegistration = new Text();
         titleRegistration.setText("Přihlašovací Údaje:");
         titleRegistration.getStyleClass().add("title");
 
-        //Form - Jmeno
+        //FORM - Jmeno
         firstNameLabel = new Label();
         firstNameLabel.setText("Jméno:");
         firstNameField = new TextField();
         firstNameField.setPromptText("Jan");
 
-        //Form - Přijmení
+        //FORM - Přijmení
         lastNameLabel = new Label();
         lastNameLabel.setText("Přijmení:");
         lastNameField = new TextField();
         lastNameField.setPromptText("Novák");
 
-        //Form - username
+        //FORM - username
         usernameLabel = new Label();
         usernameLabel.setText("Nickname:");
         usernameField = new TextField();
         usernameField.setPromptText("jizzy85");
 
-        //Form - email
+        //FORM - email
         emailLabel = new Label();
         emailLabel.setText("Email:");
         emailField = new TextField();
         emailField.setPromptText("jizzy@email.com");
 
-        //Form - password
+        //FORM - password
         passwordLabel = new Label();
         passwordLabel.setText("Heslo:");
         passwordField = new PasswordField();
         passwordField.setPromptText("password");
 
-        //Form - password znovu
+        //FORM - password znovu
         passwordConfirmLabel = new Label();
         passwordConfirmLabel.setText("Potvrď heslo:");
         passwordConfirmField = new PasswordField();
         passwordConfirmField.setPromptText("password");
 
-        //Tlacitko - submit
+        //BUTTON - potvrzeni registrace
         submitButton = new Button();
         submitButton.getStyleClass().add("blueButton");
         submitButton.setText("Registrovat");
@@ -129,7 +132,7 @@ public class Registration {
             }
         });
 
-        //Tlacitko - cancel
+        //BUTTON - zpet na minulou obrazovku
         cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
@@ -174,11 +177,11 @@ public class Registration {
         secondGridPane.add(passwordConfirmField,1,4);
         secondGridPane.add(boxButtons,1,5);
 
+        //Vbox - spojeni formularu
         VBox vBox = new VBox();
         vBox.getStyleClass().add("registrationBox");
         vBox.getChildren().addAll(firstGridPane,secondGridPane);
         vBox.setSpacing(20);
-
 
         //Window - setup
         BorderPane borderPane = new BorderPane();

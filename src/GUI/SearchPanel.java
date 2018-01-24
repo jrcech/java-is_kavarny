@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import logic.Cafe;
 import logic.Database;
 
+/** SearchPanel - Generovany seznam nalezenych kavaren
+ * @author slav02
+ * @version ZS 2018
+ */
 public class SearchPanel extends VBox implements Observer {
 
     private Database database;
@@ -21,7 +25,10 @@ public class SearchPanel extends VBox implements Observer {
     private Label ratingDataLabel;
     private Button detailButton;
 
-
+    /** Contructor
+     * @param lastStage instance predesleho okna
+     * @param database instance databaze
+     */
     public SearchPanel(Stage lastStage, Database database){
         this.lastStage = lastStage;
         this.database = database;
@@ -29,6 +36,7 @@ public class SearchPanel extends VBox implements Observer {
         update();
     }
 
+    /** Generuje seznam hledanych kavaren**/
     @Override
     public void update(){
         this.getChildren().clear();
@@ -64,7 +72,7 @@ public class SearchPanel extends VBox implements Observer {
                 DetailCafe detailCafe = new DetailCafe(lastStage,database,id);
             });
 
-            //BUTTON Container
+            //Container of button
             BorderPane buttonPane = new BorderPane();
             buttonPane.setCenter(detailButton);
 

@@ -1,6 +1,6 @@
 package logic;
 
-/** Class Person
+/** Class Cafe
  * @author slav02
  * @version ZS 2017
  */

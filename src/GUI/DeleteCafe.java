@@ -8,17 +8,21 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Database;
 
+/** Potvrzovaci obrazovka pri smazani kavarny
+ * @author cejc2
+ * @version ZS 2018
+ */
 public class DeleteCafe {
     private Stage deleteStage;
 
     public DeleteCafe(Stage lastStage, Database database, int idCafe) {
 
-        //Titulek
+        //TITLE
         Text title = new Text();
         title.setText("Opravdu chcete smazat kavárnu");
         title.getStyleClass().add("title-small");
 
-        //Tlacitko - confirm
+        //BUTTON - confirm
         Button confirmButton = new Button();
         confirmButton.getStyleClass().add("deleteButton");
         confirmButton.setText("Potvrdit smazání");
@@ -46,7 +50,7 @@ public class DeleteCafe {
             }
         });
 
-        //Tlacitko - cancel
+        //BUTTON - cancel
         Button cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {

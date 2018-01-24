@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 import logic.Cafe;
 import logic.Database;
 
+/** EditCafe - Obrazovka upravy dat kavarny / pridani nove kavarny
+ * @author slav02 / cecj2
+ * @version ZS 2018
+ */
 public class EditCafe {
 
     private Database database;
@@ -37,60 +41,65 @@ public class EditCafe {
     private Button submitButton;
     private Button cancelButton;
 
+    /**Constructor
+     * @param lastStage Stage minuleho okna
+     * @param database
+     * @param idCafe id kafe, ktere editujeme
+     */
     public EditCafe(Stage lastStage, Database database, int idCafe){
         this.database = database;
         lastStage.hide();
 
-        //Titulek
+        //TITLE
         Text title = new Text();
         title.setText("Vyplňte údaje kavárny");
         title.getStyleClass().add("title");
 
-        //Form - Nazev
+        //FORM - Nazev
         nameLabel = new Label();
         nameLabel.setText("Název:");
         nameField = new TextField();
 
-        //Form - Adresa
+        //FORM - Adresa
         addressLabel = new Label();
         addressLabel.setText("Adresa:");
         addressField = new TextField();
 
-        //Form - Kraje
+        //FORM - Kraje
         regionLabel = new Label();
         regionLabel.setText("Kraj:");
         ComboBox regionBox = new ComboBox();
         regionBox.getItems().addAll("Praha", "Středočeský Kraj", "Jihočeský Kraj", "Plzeňský kraj", "Karlovarský kraj", "Ústecký kraj", "Liberecký kraj", "Královehradecký kraj", "Pardubický kraj", "kraj Vysočina", "Jihomoravský kraj", "Olomoucký kraj", "Moravskoslezský kraj", "Zlínský kraj");
         regionBox.getSelectionModel().selectFirst();
 
-        //Form - Popis
+        //FORM - Popis
         shortDescLabel = new Label();
         shortDescLabel.setText("Krátký popis:");
         shortDescField = new TextField();
 
-        //Form - Popis
+        //FORM - Popis
         descLabel = new Label();
         descLabel.setText("Popis:");
         descField = new TextField();
         descLabel.setWrapText(true);
 
-        //Form - Nabidka
+        //FORM - Nabidka
         offerLabel = new Label();
         offerLabel.setText("Nabídka:");
         offerField = new TextField();
 
-        //Form - Znacka kavy
+        //FORM - Znacka kavy
         coffeeBrandLabel = new Label();
         coffeeBrandLabel.setText("Značka kávy: ");
         coffeeBrandField = new TextField();
 
-        //Form - Udalost
+        //FORM - Udalost
         eventLabel = new Label();
         eventLabel.setText("Událost:");
         eventField = new TextField();
         eventLabel.setWrapText(true);
 
-        //Pokud neni kavarna nova (tzn nema id 99999999), vyplni se udaje z datavaze
+        //Pokud neni kavarna nova (tzn nema id 99999999), vyplni se udaje z databaze
         if (idCafe != 99999999) {
             for (Cafe cafe : database.getCafe()) {
                 if (idCafe == cafe.getId()) {
@@ -106,7 +115,7 @@ public class EditCafe {
             }
         }
 
-        //Tlacitko - submit
+        //BUTTON - submit
         submitButton = new Button();
         submitButton.getStyleClass().add("submitButton");
         submitButton.setText("Potvrdit");
@@ -166,14 +175,13 @@ public class EditCafe {
 
         });
 
-        //Tlacitko - cancel
+        //BUTTON - cancel
         cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
             editStage.hide();
             lastStage.show();
         });
-
 
         // TilePane - spojeni tlacitek
         HBox boxButtons = new HBox(15);
@@ -205,7 +213,7 @@ public class EditCafe {
         gridPane.add(offerField,1,8);
         gridPane.add(boxButtons,1,9);
 
-        //Window - setup
+        //WINDOW - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
         Scene scene = new Scene(borderPane, 350, 450);

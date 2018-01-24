@@ -7,6 +7,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import logic.Database;
 
+/** Hlavni okno aplikace - hledani + pridani kavarny
+ * @author slav02 / cejc2
+ * @version ZS 2018
+ */
 public class Application {
 
     private Stage appStage;
@@ -19,6 +23,10 @@ public class Application {
     private Button searchButton;
     private Button newCafeButton;
 
+    /**Constructor
+     * @param lastStage Stage minuleho okna
+     * @param database
+     */
     public Application(Stage lastStage, Database database){
 
         lastStage.hide();
@@ -33,13 +41,15 @@ public class Application {
         scene.getStylesheets().add("styles/styles.css");
         appStage.setScene(scene);
 
-
+        //LABEL - uvitaci zprava
         welcomeLabel = new Label();
         welcomeLabel.setText("Vítejte uživateli " + database.getLoggedPerson().getUsername());
         welcomeLabel.getStyleClass().add("welcomeLabel");
+        //LABEL - kavarny nenalezeny
         notFoundLabel = new Label();
         notFoundLabel.setText("Nic podobného jsme nenalezli, zkuste zadat něco jiného");
         notFoundLabel.getStyleClass().add("notFoundLabel");
+        //LABEL - kavarny nalezeny
         foundLabel = new Label();
         foundLabel.setText("Seznam nalezených kaváren");
         foundLabel.getStyleClass().add("foundLabel");
@@ -82,12 +92,12 @@ public class Application {
             controlsPanel.getChildren().addAll(searchField, searchButton, newCafeButton);
         }
 
-
+        //VBOX - hodni panel + informace
         VBox vBox = new VBox();
         vBox.getChildren().addAll(controlsPanel, infoPane);
 
         searchPanel = new SearchPanel(appStage, database);
-        //FUNCTION - search button
+        //BUTTON - vyhleda kavarnu z text fieldu
         searchButton.setOnAction(event -> {
             String text = searchField.getText();
             String sql = "SELECT * FROM sql11216990.cafe WHERE name LIKE '%" + text + "%'";
@@ -105,7 +115,6 @@ public class Application {
             }
 
         });
-
 
         borderPane.setTop(menuPanel);
         borderPane.setCenter(vBox);

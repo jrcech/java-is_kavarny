@@ -9,11 +9,14 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import main.Main;
 
+/** Panel zobrazujici hodnoceni kavarny
+ * @author slav02 / cejc2
+ * @version ZS 2018
+ */
 public class MenuPanel extends MenuBar {
     private Application application;
     private Stage appStage;
     private BorderPane borderPane;
-    private Login login;
 
     public MenuPanel(Application application, Stage appStage, BorderPane borderPane){
         this.application = application;
@@ -21,11 +24,13 @@ public class MenuPanel extends MenuBar {
         this.borderPane = borderPane;
         init();
     }
+
+    /** Vytvari menu **/
     public void init(){
         // 100 % width
         this.prefWidthProperty().bind(appStage.widthProperty());
 
-        // MENU - Operace v Aplikaci
+        //MENU - Operace v Aplikaci
         Menu appMenu = new Menu("Program");
         MenuItem logOut = new MenuItem("Odhlásit se");
         MenuItem end = new MenuItem("Ukončit program");
@@ -37,7 +42,7 @@ public class MenuPanel extends MenuBar {
         });
         end.setOnAction(actionEvent -> Platform.exit());
 
-        // MENU - Napoveda
+        //MENU - Napoveda
         Menu helpMenu = new Menu("Nápověda");
         MenuItem about = new MenuItem("O aplikaci");
         helpMenu.getItems().addAll(about);
@@ -55,7 +60,8 @@ public class MenuPanel extends MenuBar {
             oProgramu.initOwner(appStage);
             oProgramu.showAndWait();
         });
-        // Spojeni do MenuBar
+
+        //Spojeni do MenuBar
         this.getMenus().addAll(appMenu, helpMenu);
     }
 }

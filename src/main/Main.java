@@ -16,26 +16,29 @@ import javafx.scene.text.*;
 
 import java.awt.event.MouseEvent;
 
+/** Uvodni obrazovka systemu
+ * @author slav02
+ * @version ZS 2018
+ */
 public class Main extends Application {
 
     public void start(Stage primaryStage){
         BorderPane borderPane = new BorderPane();
 
-        //Titulek
+        //TITLE
         Text title = new Text();
         title.setText("Vítejte v Informačním systému\npro kávové závisláky");
         title.getStyleClass().add("title");
 
-        //Tlacitko - prihlaseni
+        //BUTTON - prihlaseni -> login obrazovka
         Button login = new Button();
         login.getStyleClass().add("submitButton");
-
         login.setText("Přihlášení");
         login.setOnAction(event -> {
             Login log = new Login(primaryStage);
         });
 
-        //Tlacitko - registrace
+        //BUTTON - registrace -> obrazovka s registraci
         Button registration = new Button();
         registration.getStyleClass().add("blueButton");
         registration.setText("Registrace");
@@ -43,17 +46,16 @@ public class Main extends Application {
             Registration reg = new Registration(primaryStage);
         });
 
-        //VBox
+        //VBOX - Titulek + Prihlaseni + Registrace
         VBox vBox = new VBox();
         vBox.getChildren().addAll(title, login, registration);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
 
-        //Window - setup
+        //WINDOW - setup
         borderPane.setCenter(vBox);
         Scene scene = new Scene(borderPane, 450, 300);
         scene.getStylesheets().add("styles/styles.css");
-
         primaryStage.setTitle("Aplikace káva");
         primaryStage.setScene(scene);
         primaryStage.show();

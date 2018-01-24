@@ -13,6 +13,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Database;
 
+/** Panel zobrazujici hodnoceni kavarny
+ * @author slav02 / cejc2
+ * @version ZS 2018
+ */
 public class Login {
 
     private Stage loginStage;
@@ -23,32 +27,31 @@ public class Login {
     private PasswordField passField;
     private Button submitButton;
 
-    /**
-     *
+    /**Constructor
      * @param lastStage Stage minuleho okna
      */
     public Login(Stage lastStage){
         database = new Database();
         lastStage.hide();
 
-        //Titulek
+        //TITLE
         Text title = new Text();
         title.setText("Zadejte přihlašovací údaje");
         title.getStyleClass().add("title");
 
-        //Form - username
+        //FORM - username
         userLabel = new Label();
         userLabel.setText("Účet:");
         userField = new TextField();
         userField.setText("jizzy");
 
-        //Form - password
+        //FORM - password
         passLabel = new Label();
         passLabel.setText("Heslo:");
         passField = new PasswordField();
         passField.setText("12345Jizzy");
 
-        //Button - submit
+        //BUTTON - submit
         submitButton = new Button();
         submitButton.getStyleClass().add("submitButton");
         submitButton.setText("Přihlásit");
@@ -67,7 +70,7 @@ public class Login {
             }
         });
 
-        //Button - cancel
+        //BUTTON - cancel
         Button cancelButton = new Button();
         cancelButton.setText("Zpět");
         cancelButton.setOnAction(event -> {
@@ -93,7 +96,7 @@ public class Login {
         gridPane.add(passField,1,2);
         gridPane.add(boxButtons,1,3);
 
-        //Window - setup
+        //WINDOW - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(gridPane);
         Scene scene = new Scene(borderPane, 450, 300);
