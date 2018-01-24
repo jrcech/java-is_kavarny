@@ -150,6 +150,10 @@ public class EditCafe {
                     if (idCafe == 99999999) {
                         lastStage.show();
                     }
+
+                    //aktualizace dat
+                    String sql1 = "SELECT * FROM sql11216990.cafe";
+                    database.operate("SEARCH", sql1);
                 } else {
                     String titleAlert = "Změna neproběhla.";
                     String textAlert = "Něco je špatně, zkuste to prosím později.";

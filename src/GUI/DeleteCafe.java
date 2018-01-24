@@ -28,6 +28,10 @@ public class DeleteCafe {
                 lastStage.hide();
                 database.alert(titleAlert, textAlert);
                 deleteStage.hide();
+
+                //aktualizace dat
+                String sql1 = "SELECT * FROM sql11216990.cafe";
+                database.operate("SEARCH", sql1);
             } else {
                 String titleAlert = "Kavárna nebyla smazána";
                 String textAlert = "Došlo k chybě";
