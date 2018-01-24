@@ -166,6 +166,9 @@ public class DetailCafe {
                     String titleAlert = "Vaše hodnocení bylo uloženo";
                     String textAlert = "Vaše hodnocení bylo uloženo do systému. Děkujeme";
                     database.alert(titleAlert, textAlert);
+
+                    detailStage.hide();
+                    new DetailCafe(lastStage, database, idCafe);
                 }
                 else {
                     String titleAlert = "Hodnocení se nepodařilo uložit";
