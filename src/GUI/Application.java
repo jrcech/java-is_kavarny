@@ -51,6 +51,7 @@ public class Application {
 
         //PANEL - vysledky hledani
         ScrollPane searchResults = new ScrollPane();
+        searchResults.setStyle("-fx-background-color:transparent;");
         searchResults.getStyleClass().add("searchResults");
         searchResults.setFitToWidth(true);
 

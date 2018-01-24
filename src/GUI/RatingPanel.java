@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -64,17 +65,20 @@ public class RatingPanel extends VBox implements Observer  {
                 commentTextArea.setWrapText(true);
                 commentTextArea.setEditable(false);
 
-                //Tlacitko - delete
+                //BUTTON - delete
                 idRating = rating.getId();
                 deleteButton = new Button();
+                deleteButton.getStyleClass().add("deleteButton");
                 deleteButton.setText("Smazat");
                 deleteButton.setOnAction(event -> new DeleteRating(lastStage, database, idRating));
 
                 //CAFE Container
                 GridPane ratingPane = new GridPane();
                 ratingPane.setAlignment(Pos.TOP_LEFT);
-                ratingPane.setHgap(5);
-                ratingPane.setVgap(0);
+                ratingPane.setHgap(10);
+                ratingPane.setVgap(10);
+                ratingPane.getColumnConstraints().add(new ColumnConstraints(100));
+                ratingPane.getColumnConstraints().add(new ColumnConstraints(200));
                 if(rating.getComment().length() > 0){
                     ratingPane.add(userLabel,0,0);
                     ratingPane.add(userDataLabel,1,0);

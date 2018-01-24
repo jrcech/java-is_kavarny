@@ -1,10 +1,19 @@
 .borderPane{
     -fx-background: #ffffff;
 }
+.panePadding{
+    -fx-padding: 25px;
+}
 .title {
     -fx-padding: 15px;
     -fx-color:black;
     -fx-font-size: 25px;
+    -fx-text-alignment: center;
+}
+.title-small {
+    -fx-padding: 15px;
+    -fx-color:black;
+    -fx-font-size: 19px;
     -fx-text-alignment: center;
 }
 
@@ -18,9 +27,10 @@
 }
 .submitButton{
     -fx-background-color: #61a910;
-    -fx-border-color: #747474;
-    -fx-border-width: 1px;
-    -fx-border-radius: 3px;
+    -fx-text-fill: white;
+}
+.deleteButton{
+    -fx-background-color: #a92f2b;
     -fx-text-fill: white;
 }
 .label{
