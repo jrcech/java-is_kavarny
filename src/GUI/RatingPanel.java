@@ -13,7 +13,7 @@ import logic.Person;
 import logic.Rating;
 
 /** Panel zobrazujici hodnoceni kavarny
- * @author slav02 / cejc2
+ * @author slav02 / cecj02
  * @version ZS 2018
  */
 public class RatingPanel extends VBox implements Observer  {
@@ -72,7 +72,7 @@ public class RatingPanel extends VBox implements Observer  {
                 deleteButton = new Button();
                 deleteButton.getStyleClass().add("deleteButton");
                 deleteButton.setText("Smazat");
-                deleteButton.setOnAction(event -> new DeleteRating(lastStage, database, idRating));
+                deleteButton.setOnAction(event -> new DeleteRating(database, idRating));
 
                 //CAFE Container
                 GridPane ratingPane = new GridPane();
@@ -103,7 +103,6 @@ public class RatingPanel extends VBox implements Observer  {
                     }
                 }
                 this.getChildren().addAll(ratingPane);
-
 
             }
         }

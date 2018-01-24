@@ -104,8 +104,5 @@ public class SearchPanel extends VBox implements Observer {
 
             this.getChildren().add(searchPanelLayout);
         }
-
     }
-
-
 }

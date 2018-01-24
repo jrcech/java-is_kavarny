@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import logic.Database;
 
 /** Potvrzovaci obrazovka pri smazani kavarny
- * @author cejc2
+ * @author cecj02
  * @version ZS 2018
  */
 public class DeleteCafe {

@@ -1,29 +1,24 @@
 package interfaces;
 
-/**
+/** Interface Subject s observery
  *
- *
- * @author
- * @version
+ * @author cecj02
+ * @version ZS 2018
  * 
  */
 public interface Subject {
-    
-    /**
-     *
-     * @param
+
+    /** Pridani observeru
+     * @param observer Observer
      */
     public void registerObserver(Observer observer);
 
-    /**
-     *
-     * @param
+    /** Odebrani observeru
+     * @param observer Observer
      */
     public void cancelObserver(Observer observer);
 
-    /**
-     * 
-     *
+    /** Aktualizace observeru
      */
     public void notifyAllObservers();
 }

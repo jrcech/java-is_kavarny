@@ -11,7 +11,7 @@ import logic.Database;
 import logic.Rating;
 
 /** DetailCafe - Obrazovka detailu kavarny + nove hodnoceni
- * @author slav02 / cecj2
+ * @author slav02 / cecj02
  * @version ZS 2018
  */
 public class DetailCafe {

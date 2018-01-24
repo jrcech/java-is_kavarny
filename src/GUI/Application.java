@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import logic.Database;
 
 /** Hlavni okno aplikace - hledani + pridani kavarny
- * @author slav02 / cejc2
+ * @author slav02 / cecj02
  * @version ZS 2018
  */
 public class Application {
@@ -25,7 +25,7 @@ public class Application {
 
     /**Constructor
      * @param lastStage Stage minuleho okna
-     * @param database
+     * @param database Databse aplikace
      */
     public Application(Stage lastStage, Database database){
 
@@ -121,5 +121,4 @@ public class Application {
         appStage.show();
 
     }
-
 }

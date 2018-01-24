@@ -9,18 +9,17 @@ import javafx.stage.Stage;
 import logic.Database;
 
 /** Potvrzovaci obrazovka pri smazani hodnoceni
- * @author cejc2
+ * @author cecj02
  * @version ZS 2018
  */
 public class DeleteRating {
     private Stage deleteStage;
 
     /**Constructor
-     * @param lastStage Stage minuleho okna
-     * @param database
+     * @param database databaze alikace
      * @param idRating id ratingu, ktery chceme smazat
      */
-    public DeleteRating(Stage lastStage, Database database, int idRating) {
+    public DeleteRating(Database database, int idRating) {
 
         //TITLE
         Text title = new Text();

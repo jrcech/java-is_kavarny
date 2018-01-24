@@ -7,14 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
-
-
-import java.awt.event.MouseEvent;
 
 /** Uvodni obrazovka systemu
  * @author slav02
@@ -34,17 +29,13 @@ public class Main extends Application {
         Button login = new Button();
         login.getStyleClass().add("submitButton");
         login.setText("Přihlášení");
-        login.setOnAction(event -> {
-            Login log = new Login(primaryStage);
-        });
+        login.setOnAction(event -> new Login(primaryStage));
 
         //BUTTON - registrace -> obrazovka s registraci
         Button registration = new Button();
         registration.getStyleClass().add("blueButton");
         registration.setText("Registrace");
-        registration.setOnAction(event -> {
-            Registration reg = new Registration(primaryStage);
-        });
+        registration.setOnAction(event -> new Registration(primaryStage));
 
         //VBOX - Titulek + Prihlaseni + Registrace
         VBox vBox = new VBox();

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import logic.Database;
 
 /** Panel zobrazujici hodnoceni kavarny
- * @author slav02 / cejc2
+ * @author slav02 / cecj02
  * @version ZS 2018
  */
 public class Login {
@@ -107,8 +107,5 @@ public class Login {
         loginStage.setScene(scene);
         loginStage.show();
 
-    }
-    public Stage getPrimaryStage() {
-        return loginStage;
     }
 }

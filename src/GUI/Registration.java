@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import logic.Database;
 
 /** Obrazovka registrace
- * @author slav02 / cejc2
+ * @author slav02 / cecj02
  * @version ZS 2018
  */
 public class Registration {

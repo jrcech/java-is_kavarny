@@ -10,7 +10,7 @@ import javafx.scene.control.MenuItem;
 import main.Main;
 
 /** Panel zobrazujici hodnoceni kavarny
- * @author slav02 / cejc2
+ * @author slav02 / cejc02
  * @version ZS 2018
  */
 public class MenuPanel extends MenuBar {

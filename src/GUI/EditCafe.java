@@ -15,7 +15,7 @@ import logic.Cafe;
 import logic.Database;
 
 /** EditCafe - Obrazovka upravy dat kavarny / pridani nove kavarny
- * @author slav02 / cecj2
+ * @author slav02 / cecj02
  * @version ZS 2018
  */
 public class EditCafe {
@@ -43,7 +43,7 @@ public class EditCafe {
 
     /**Constructor
      * @param lastStage Stage minuleho okna
-     * @param database
+     * @param database Database aplikace
      * @param idCafe id kafe, ktere editujeme
      */
     public EditCafe(Stage lastStage, Database database, int idCafe){
