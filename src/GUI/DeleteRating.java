@@ -27,6 +27,10 @@ public class DeleteRating {
                 String textAlert = "Úspěšně jste smazali hodnocení";
                 database.alert(titleAlert, textAlert);
                 deleteStage.hide();
+
+                //aktualizace dat
+                String sql1 = "SELECT * FROM sql11216990.cafe";
+                database.operate("SEARCH", sql1);
             } else {
                 String titleAlert = "Hodnocení nebylo smazáno";
                 String textAlert = "Došlo k chybě";
