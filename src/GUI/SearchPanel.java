@@ -36,18 +36,21 @@ public class SearchPanel extends VBox implements Observer {
 
             //LABEL - nazev kavarny
             nameLabel = new Label();
+            nameLabel.getStyleClass().add("boldLabel");
             nameLabel.setText("Název:");
             nameDataLabel = new Label();
             nameDataLabel.setText(cafe.getName());
 
             //LABEL - kratky popis
             shortDescriptionLabel = new Label();
+            shortDescriptionLabel.getStyleClass().add("boldLabel");
             shortDescriptionLabel.setText("Popis:");
             shortDescriptionDataLabel = new Label();
             shortDescriptionDataLabel.setText(cafe.getShortDescription());
 
             //LABEL - hodnoceni
             ratingLabel = new Label();
+            ratingLabel.getStyleClass().add("boldLabel");
             ratingLabel.setText("Hodnocení: ");
             ratingDataLabel = new Label();
             ratingDataLabel.setText("" + cafe.getRating());
@@ -68,8 +71,8 @@ public class SearchPanel extends VBox implements Observer {
             //CAFE Container
             GridPane cafePane = new GridPane();
             cafePane.setAlignment(Pos.TOP_LEFT);
-            cafePane.setHgap(5);
-            cafePane.setVgap(0);
+            cafePane.setHgap(15);
+            cafePane.setVgap(5);
             cafePane.add(nameLabel,0,0);
             cafePane.add(nameDataLabel,1,0);
             cafePane.add(shortDescriptionLabel,0,1);
