@@ -32,7 +32,7 @@ public class Registration {
     private Button submitButton;
     private Button cancelButton;
 
-    /**
+    /**Constructor
      *
      * @param lastStage Stage minuleho okna
      */
@@ -192,13 +192,19 @@ public class Registration {
         registrationStage.show();
     }
 
-    //Vypis chyb registrace
+    /** Vypsani chyb validace registrace
+     * @param validUsername Je nickname validni
+     * @param validFirstName Je jmeno validni
+     * @param validLastName Je prijmeni validni
+     * @param validEmail Je email validni
+     * @param validPasswd Je heslo validni
+     */
     private void validationError(boolean validUsername,
                                  boolean validFirstName,
                                  boolean validLastName,
                                  boolean validEmail,
                                  boolean validPasswd) {
-        String error = "Chyba: ";
+        String error = "Chyba";
         if (!validUsername) {
             usernameLabel.setStyle("-fx-text-fill: red");
             error += "\nNickname musí obsahovat 3 až 30 znaků";
