@@ -58,12 +58,10 @@ public class RatingPanel extends VBox implements Observer  {
                 //LABEL + TEXTAREA - Comment
                 Label commentLabel = new Label();
                 commentLabel.setText("Komentář:");
-                TextArea commentTextArea = new TextArea();
+                Label commentTextArea = new Label();
+                commentTextArea.getStyleClass().add("label-small");
                 commentTextArea.setText(rating.getComment());
-                commentTextArea.setPrefRowCount(2);
-                commentTextArea.setPrefColumnCount(10);
                 commentTextArea.setWrapText(true);
-                commentTextArea.setEditable(false);
 
                 //BUTTON - delete
                 idRating = rating.getId();
@@ -74,10 +72,11 @@ public class RatingPanel extends VBox implements Observer  {
 
                 //CAFE Container
                 GridPane ratingPane = new GridPane();
+                ratingPane.getStyleClass().add("ratingPane");
                 ratingPane.setAlignment(Pos.TOP_LEFT);
                 ratingPane.setHgap(10);
-                ratingPane.setVgap(10);
-                ratingPane.getColumnConstraints().add(new ColumnConstraints(100));
+                ratingPane.setVgap(5);
+                ratingPane.getColumnConstraints().add(new ColumnConstraints(85));
                 ratingPane.getColumnConstraints().add(new ColumnConstraints(200));
                 if(rating.getComment().length() > 0){
                     ratingPane.add(userLabel,0,0);

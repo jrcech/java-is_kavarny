@@ -138,7 +138,7 @@ public class Registration {
         });
 
         //TilePane - spojeni tlacitek
-        HBox boxButtons = new HBox(5);
+        HBox boxButtons = new HBox(15);
         boxButtons.getStyleClass().add("registrationBoxButtons");
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
@@ -147,7 +147,7 @@ public class Registration {
         GridPane firstGridPane = new GridPane();
         firstGridPane.setAlignment(Pos.CENTER);
         firstGridPane.setHgap(10);
-        firstGridPane.setVgap(10);
+        firstGridPane.setVgap(12);
         firstGridPane.getColumnConstraints().add(new ColumnConstraints(100)); // column 0 is 100 wide
         firstGridPane.getColumnConstraints().add(new ColumnConstraints(200));
         firstGridPane.add(titlePersonal,0,0, 2,1);
@@ -160,7 +160,7 @@ public class Registration {
         GridPane secondGridPane = new GridPane();
         secondGridPane.setAlignment(Pos.CENTER);
         secondGridPane.setHgap(10);
-        secondGridPane.setVgap(10);
+        secondGridPane.setVgap(12);
         secondGridPane.getColumnConstraints().add(new ColumnConstraints(100)); // column 0 is 100 wide
         secondGridPane.getColumnConstraints().add(new ColumnConstraints(200));
         secondGridPane.add(titleRegistration,0,0, 2,1);
@@ -183,7 +183,7 @@ public class Registration {
         //Window - setup
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(vBox);
-        Scene scene = new Scene(borderPane, 450, 400);
+        Scene scene = new Scene(borderPane, 450, 420);
         scene.getStylesheets().add("styles/styles.css");
 
         registrationStage = new Stage();

@@ -76,7 +76,7 @@ public class Login {
         });
 
         // TilePane - spojeni tlacitek
-        HBox boxButtons = new HBox(10);
+        HBox boxButtons = new HBox(15);
         boxButtons.getStyleClass().add("registrationBoxButtons");
         boxButtons.getChildren().addAll(submitButton, cancelButton);
         boxButtons.setAlignment(Pos.BASELINE_RIGHT);
@@ -85,7 +85,7 @@ public class Login {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
-        gridPane.setVgap(10);
+        gridPane.setVgap(12);
         gridPane.add(title,0,0, 2,1);
         gridPane.add(userLabel,0,1);
         gridPane.add(userField,1,1);

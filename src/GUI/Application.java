@@ -59,6 +59,7 @@ public class Application {
         searchField = new TextField();
         searchField.getStyleClass().add("searchField");
         searchButton = new Button();
+        searchButton.getStyleClass().add("submitButton");
         searchButton.setText("Vyhledat");
 
 
@@ -71,7 +72,7 @@ public class Application {
         });
 
         //CONTROLS PANEL
-        HBox controlsPanel = new HBox(10);
+        HBox controlsPanel = new HBox(15);
         controlsPanel.getStyleClass().add("searchControlsPanel");
         controlsPanel.setHgrow(searchField, Priority.ALWAYS);
         controlsPanel.setAlignment(Pos.TOP_CENTER);
