@@ -1,6 +1,6 @@
 package logic;
 
-/** Class Person
+/** Class Rating
  * @author slav02
  * @version ZS 2017
  */
@@ -25,5 +25,25 @@ public class Rating {
         this.idPerson = idPerson;
         this.rating = rating;
         this.comment = comment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getIdCafe() {
+        return idCafe;
+    }
+
+    public int getIdPerson() {
+        return idPerson;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public String getComment() {
+        return comment;
     }
 }

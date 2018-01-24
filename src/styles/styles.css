@@ -1,0 +1,109 @@
+.borderPane{
+    -fx-background: #ffffff;
+}
+.panePadding{
+    -fx-padding: 25px;
+}
+.addRatingPane{
+    -fx-padding: 0px 0px 15px 0px;
+}
+.title {
+    -fx-padding: 15px;
+    -fx-color:black;
+    -fx-font-size: 25px;
+    -fx-text-alignment: center;
+}
+.title-small {
+    -fx-padding: 15px;
+    -fx-color:black;
+    -fx-font-size: 19px;
+    -fx-text-alignment: center;
+}
+
+.button {
+    -fx-padding: 5px 15px;
+    -fx-border-color: #747474;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-font-size: 16px;
+    -fx-text-alignment: center;
+}
+.submitButton{
+    -fx-background-color: #61a910;
+    -fx-text-fill: white;
+}
+.deleteButton{
+    -fx-background-color: #a92f2b;
+    -fx-text-fill: white;
+}
+.label{
+    -fx-font-size: 16px;
+}
+.label-small{
+    -fx-font-size: 12px;
+}
+.welcomeLabel {
+    -fx-padding: 15px 0px 20px 0px;
+    -fx-color:black;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+    -fx-font-weight: 800;
+}
+.foundLabel {
+    -fx-padding: 15px 0px 20px 0px;
+    -fx-text-fill:black;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+    -fx-font-weight: 800;
+}
+.notFoundLabel {
+    -fx-padding: 15px 0px 20px 0px;
+    -fx-text-fill:red;
+    -fx-font-size: 16px;
+    -fx-text-alignment: center;
+    -fx-font-weight: 800;
+}
+.searchControlsPanel{
+    -fx-padding: 15px 50px;
+    -fx-background-color: f4f4f4;
+}
+.infoPane{
+    -fx-background-color: white;
+}
+
+.boldLabel{
+    -fx-font-weight: 800;
+}
+.searchField{
+    -fx-padding: 9px 0px 10px 0px;
+}
+.blueButton{
+    -fx-text-fill: white;
+    -fx-background-color: #22a2d0;
+}
+.searchPanelLayout{
+    -fx-background-color: white;
+    -fx-padding: 10px 10px 10px 30px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #d6d6d6;
+}
+.detailButton{
+    -fx-text-fill: white;
+    -fx-background-color: #22a2d0;
+    -fx-font-size: 14px;
+}
+.registrationBox{
+    -fx-padding: 20px 0 0 0;
+}
+.registrationBoxButtons {
+    -fx-padding: 10px 0 0 0;
+}
+.ratingPane{
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-border-width: 1 0 1 0;
+    -fx-border-color: #d6d6d6;
+}
+.detailPane{
+    -fx-padding: 0 30px 0 0 ;
+}

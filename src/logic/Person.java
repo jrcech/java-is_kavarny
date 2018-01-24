@@ -29,4 +29,15 @@ public class Person {
         this.isAdmin = isAdmin;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 }
