@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.Database;
 
@@ -12,8 +13,14 @@ public class DeleteCafe {
 
     public DeleteCafe(Stage lastStage, Database database, int idCafe) {
 
+        //Titulek
+        Text title = new Text();
+        title.setText("Opravdu chcete smazat kavárnu");
+        title.getStyleClass().add("title-small");
+
         //Tlacitko - confirm
         Button confirmButton = new Button();
+        confirmButton.getStyleClass().add("deleteButton");
         confirmButton.setText("Potvrdit smazání");
         confirmButton.setOnAction(event -> {
 
@@ -49,13 +56,18 @@ public class DeleteCafe {
 
         //GridPane - rozlozeni okna pro potvrzeni smazani
         GridPane gridPane = new GridPane();
-        gridPane.add(confirmButton, 1, 1);
-        gridPane.add(cancelButton, 2, 1);
+        gridPane.setHgap(60);
+        gridPane.setVgap(20);
+        gridPane.add(title, 0, 0,2,1);
+        gridPane.add(confirmButton, 0, 1);
+        gridPane.add(cancelButton, 1, 1);
 
         //Window - setup
         BorderPane borderPane = new BorderPane();
+        borderPane.getStyleClass().add("panePadding");
         borderPane.setCenter(gridPane);
-        Scene scene = new Scene(borderPane, 450, 400);
+        Scene scene = new Scene(borderPane, 350, 150);
+        scene.getStylesheets().add("styles/styles.css");
 
         deleteStage = new Stage();
         deleteStage.setTitle("Aplikace káva - Smazání kavárny");
