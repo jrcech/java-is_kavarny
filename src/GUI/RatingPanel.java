@@ -64,7 +64,7 @@ public class RatingPanel extends VBox implements Observer  {
                 commentTextArea.setWrapText(true);
 
                 //BUTTON - delete
-                idRating = rating.getId();
+                final int idRating = rating.getId();
                 deleteButton = new Button();
                 deleteButton.getStyleClass().add("deleteButton");
                 deleteButton.setText("Smazat");
