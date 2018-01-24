@@ -32,7 +32,8 @@ public class MenuPanel extends MenuBar {
         appMenu.getItems().addAll(logOut, end);
         logOut.setOnAction(event -> {
             appStage.hide();
-            Login log = new Login(appStage);
+            Main main = new Main();
+            main.start(appStage);
         });
         end.setOnAction(actionEvent -> Platform.exit());
 
